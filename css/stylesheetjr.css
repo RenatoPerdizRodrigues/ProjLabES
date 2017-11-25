@@ -7,7 +7,21 @@ body {
 }
 
 .welcome {
-    position: relative;
-    top: 40px;
-    left: 20px;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+.dropdown-item {
+    background-color: #ffcc00;
+    border-style: none;
+}
+
+.dropdown-menu {
+    border-style: none;
+    margin-top: 8px;
+}
+
+.dropdown-item:hover {
+    background-color: #ffe638;
 }
