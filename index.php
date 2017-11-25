@@ -1,3 +1,7 @@
+<?php 
+    include_once 'functions.php'; 
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +11,6 @@
     <link href="css/simple-line-icons.min" rel="stylesheet">
     <link href="css/style.min.css" rel="stylesheet">
     <link href="css/stylesheetjr.css" rel="stylesheet">
-
 </head>
 <body>
     <?php include_once 'header.php'; ?>
