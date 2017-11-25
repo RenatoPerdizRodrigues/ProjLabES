@@ -68,6 +68,11 @@
         </div>
     </nav> -->
 
+    <div class="welcome">
+        <h1>Olá, administrador!</h1>
+        <h4>Hoje é dia XX/YY/ZZZZ</h4>
+    </div>
+
 
     <script src="js/libs/jquery.min.js"></script>
     <script src="js/libs/tether.min.js"></script>

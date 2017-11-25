@@ -5,3 +5,9 @@ body {
 .bg-yellow {
     background-color: #ffcc00;
 }
+
+.welcome {
+    position: relative;
+    top: 40px;
+    left: 20px;
+}
