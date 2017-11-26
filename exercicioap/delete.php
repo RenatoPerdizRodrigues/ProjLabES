@@ -1,12 +1,5 @@
 <?php
-    include_once 'config.php';
-
-    // generate urls according to root folder
-    function generateRoute($url) {
-        echo ROOT_FOLDER . $url;
-    }
-
-    function createExercise($table){
+    function deleteExercise(){
         if(isset($_POST["submit"])){
             //Comando que faz a conexão: Local, username, senha (vazia), e nome do BD
             $connection = mysqli_connect("localhost", "root", "", "xtreme_xcercise");
@@ -24,6 +17,4 @@
             } else echo "Inserção deu certo!";
         }
     }
-
-
 ?>

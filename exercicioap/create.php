@@ -22,14 +22,14 @@ include_once '../functions.php';
         </div>
 
         <div class="card-block">
-            <form>
+            <form action="create.php" method="post">
                 <div class="form-group">
                     <label>Nome</label>
                     <input type="textfield" name="nome" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>Descrição</label>
-                    <input type="number" name="descricao" class="form-control">
+                    <input type="textfield" name="descricao" class="form-control">
                 </div>
 
                 <button type="submit" name="submit" class="btn btn-primary">Submit</button>
@@ -37,6 +37,10 @@ include_once '../functions.php';
         </div>
     </div>
 </div>
+
+    <?php
+    $table = 'exercicio';
+    createExercise($table)?>
 
 <script src="../js/libs/jquery.min.js"></script>
 <script src="../js/libs/tether.min.js"></script>
