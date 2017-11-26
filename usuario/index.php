@@ -34,7 +34,7 @@ include_once '../functions.php';
                 </tr>
                 </thead>
                 <tbody>
-
+                <tr>
                     <th scope="row">1</th>
                     <td>Maria</td>
                     <td>599068047</td>
@@ -43,7 +43,6 @@ include_once '../functions.php';
                         <a class="btn btn-primary" href="edit.php" role="button">Editar</a>
                         <a class="btn btn-primary" href="delete.php" role="button">Excluir</a>
                     </td>
-                        <div>
                 </tr>
                 <tr>
                     <th scope="row">2</th>

@@ -31,11 +31,9 @@ include_once '../functions.php';
                 <th>Nome</th>
                 <th>Sobrenome</th>
                 <th>RG</th>
-                <th>CPF</th>
                 <th>Carteira de Trabalho</th>
-                <th>Salário</th>
-                <th>Data de Contratação</th>
-                <th style="width: 400px;">Ações</th>
+                <th>Status</th>
+                <th style="width: 350px;">Ações</th>
             </tr>
             </thead>
             <tbody>
@@ -44,10 +42,8 @@ include_once '../functions.php';
             <td>Maria</td>
             <td>Carolina</td>
             <td>599068047</td>
-            <td>65306598562</td>
-            <td>Feminino</td>
-            <td>165</td>
-            <td>63</td>
+            <td>1234</td>
+            <td>Ativo</td>
 
             <td>
                 <a class="btn btn-primary" href="show.php" role="button">Informações</a>
@@ -58,14 +54,12 @@ include_once '../functions.php';
             <div>
                 </tr>
                 <tr>
-                    <th scope="row">2</th>
+                    <th scope="row">1</th>
                     <td>Maria</td>
                     <td>Carolina</td>
                     <td>599068047</td>
-                    <td>65306598562</td>
-                    <td>Feminino</td>
-                    <td>165</td>
-                    <td>63</td>
+                    <td>1234</td>
+                    <td>Ativo</td>
 
                     <td>
                         <a class="btn btn-primary" href="show.php" role="button">Informações</a>
@@ -75,14 +69,12 @@ include_once '../functions.php';
                     </td>
                 </tr>
                 <tr>
-                    <th scope="row">3</th>
+                    <th scope="row">1</th>
                     <td>Maria</td>
                     <td>Carolina</td>
                     <td>599068047</td>
-                    <td>65306598562</td>
-                    <td>Feminino</td>
-                    <td>165</td>
-                    <td>63</td>
+                    <td>1234</td>
+                    <td>Ativo</td>
 
                     <td>
                         <a class="btn btn-primary" href="show.php" role="button">Informações</a>

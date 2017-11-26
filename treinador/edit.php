@@ -18,18 +18,18 @@ include_once '../functions.php';
 <div class="container mt-3">
     <div class="card">
         <div class="card-header">
-            <h1 class="h5 m-0">Adicionar Treinador</h1>
+            <h1 class="h5 m-0">Editar Treinador</h1>
         </div>
 
         <div class="card-block">
             <form>
                 <div class="form-group">
                     <label>Nome</label>
-                    <input type="textfield" name="nome" class="form-control">
+                    <input type="textfield" name="username" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>Idade</label>
-                    <input type="number" name="idade" class="form-control">
+                    <input type="number" name="userage" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>RG</label>
@@ -49,21 +49,9 @@ include_once '../functions.php';
                 </div>
                 <div class="form-group">
                     <label>Data de Contratação</label>
-                    <input type="date" name="datacontratacao" class="form-control">
+                    <input type="date" name="CPF" class="form-control">
                 </div>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="ativo" value="Ativo">
-                        Ativo
-                    </label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="ativo" value="Inativo">
-                        Inativo
-                    </label>
-                </div>
-                <br>
+
 
                 <button type="submit" name="submit" class="btn btn-primary">Submit</button>
             </form>

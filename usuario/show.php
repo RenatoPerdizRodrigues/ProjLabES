@@ -35,18 +35,19 @@ include_once '../functions.php';
                 <th>Peso</th>
             </tr>
             </thead>
+
             <tbody>
 
-            <th scope="row">1</th>
-            <td>Maria</td>
-            <td>Carolina</td>
-            <td>20</td>
-            <td>599068047</td>
-            <td>65306598562</td>
-            <td>Feminino</td>
-            <td>165</td>
-            <td>70</td>
-            <div>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Maria</td>
+                    <td>Carolina</td>
+                    <td>20</td>
+                    <td>599068047</td>
+                    <td>65306598562</td>
+                    <td>Feminino</td>
+                    <td>165</td>
+                    <td>70</td>
                 </tr>
             </tbody>
         </table>

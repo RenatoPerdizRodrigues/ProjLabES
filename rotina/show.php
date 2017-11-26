@@ -26,37 +26,24 @@ include_once '../functions.php';
             <tr>
                 <th>#</th>
                 <th>Nome</th>
-                <th>RG</th>
-                <th>CPF</th>
-                <th>Carteira de Trabalho</th>
-                <th>Salário</th>
-                <th>Data de Contratação</th>
-                <th>Status</th>
+                <th>Exercício</th>
+                <th>Repetições</th>
             </tr>
             </thead>
 
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Maria</td>
-                    <td>Carolina</td>
-                    <td>599068047</td>
-                    <td>65306598562</td>
-                    <td>Feminino</td>
-                    <td>165</td>
-                    <td>Ativo</td>
-                </tr>
-
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Maria</td>
-                    <td>Carolina</td>
-                    <td>599068047</td>
-                    <td>65306598562</td>
-                    <td>Feminino</td>
-                    <td>165</td>
-                    <td>Ativo</td>
-                </tr>
+            <tr>
+                <th scope="row">1</th>
+                <td>Cláudio</td>
+                <td>Abdominal</td>
+                <td>20</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Cláudio</td>
+                <td>Abdominal</td>
+                <td>20</td>
+            </tr>
             </tbody>
         </table>
 

@@ -20,17 +20,24 @@
                 </div>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Aparelho e Exercício</a>
+                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Exercício</a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="<?php generateRoute('exercicioap/create.php'); ?>">Cadastrar</a>
                     <a class="dropdown-item" href="<?php generateRoute('exercicioap/index.php'); ?>">Consultar</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Aparelho</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="<?php generateRoute('aparelho/create.php'); ?>">Cadastrar</a>
+                    <a class="dropdown-item" href="<?php generateRoute('aparelho/index.php'); ?>">Consultar</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Rotina</a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="<?php generateRoute('rotina/create.php'); ?>">Cadastrar</a>
-                    <a class="dropdown-item" href="<?php generateRoute('rotina/inedx.php'); ?>">Consultar</a>
+                    <a class="dropdown-item" href="<?php generateRoute('rotina/index.php'); ?>">Consultar</a>
                 </div>
             </li>
         </ul>
