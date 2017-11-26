@@ -6,30 +6,31 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
             <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Treinador</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="<?php generateRoute('treinador/create.php'); ?>">Cadastrar</a>
+                    <a class="dropdown-item" href="<?php generateRoute('treinador/index.php'); ?>">Index</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Usuário</a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="<?php generateRoute('usuario/create.php'); ?>">Cadastrar</a>
-                    <a class="dropdown-item" href="#">Alterar</a>
-                    <a class="dropdown-item" href="#">Excluir</a>
-                    <a class="dropdown-item" href="#">Consultar</a>
+                    <a class="dropdown-item" href="<?php generateRoute('usuario/index.php'); ?>">Index</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Aparelho e Exercício</a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Cadastrar</a>
-                    <a class="dropdown-item" href="#">Alterar</a>
-                    <a class="dropdown-item" href="#">Excluir</a>
-                    <a class="dropdown-item" href="#">Consultar</a>
+                    <a class="dropdown-item" href="<?php generateRoute('exercicioap/create.php'); ?>">Cadastrar</a>
+                    <a class="dropdown-item" href="<?php generateRoute('exercicioap/index.php'); ?>">Consultar</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Rotina</a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Cadastrar</a>
-                    <a class="dropdown-item" href="#">Alterar</a>
-                    <a class="dropdown-item" href="#">Excluir</a>
-                    <a class="dropdown-item" href="#">Consultar</a>
+                    <a class="dropdown-item" href="<?php generateRoute('rotina/create.php'); ?>">Cadastrar</a>
+                    <a class="dropdown-item" href="<?php generateRoute('rotina/inedx.php'); ?>">Consultar</a>
                 </div>
             </li>
         </ul>
