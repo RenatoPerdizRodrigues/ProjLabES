@@ -63,6 +63,9 @@ include_once '../functions.php';
 </div>
 </div>
 
+    <?php
+    $table = 'exercicio';
+    indexExercise($table)?>
 
 <script src="../js/libs/jquery.min.js"></script>
 <script src="../js/libs/tether.min.js"></script>
