@@ -6,6 +6,12 @@ function generateRoute($url) {
     echo ROOT_FOLDER . $url;
 }
 
+// Redirect to
+function redirectTo($page) {
+    header("Location: " . ROOT_FOLDER . $page);
+    exit();
+}
+
 //Conexão
 function connection() {
     return mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
@@ -19,6 +25,7 @@ function sendToLogin() {
 
     if($paginaAtual !== 'login.php') {
         header("Location: " . ROOT_FOLDER . "login.php");
+        exit();
     } else {
         return false;
     }
@@ -26,8 +33,9 @@ function sendToLogin() {
 
 function login($rg, $senha) {
     //Criando a query, com o nome das colunas e valores inseridos.
-    $query = "SELECT * FROM usuario WHERE RG = " . $rg;
+    $query = "SELECT * FROM treinador WHERE RG = " . $rg;
     $result = mysqli_query(connection(), $query);
+    $errors = 0;
 
     if($result && $result->num_rows > 0) {
         $usuario = array(
@@ -42,17 +50,28 @@ function login($rg, $senha) {
         //Verifica se a senha digitada é igual a senha criptografada do banco com a função do PHP
         if(password_verify($senha, $usuario['senha'])) {
             //Inicia sessão pra logar usuário
-            $_SESSION['usuario']['rg'] = $rg;
-            $_SESSION['usuario']['logado'] = base64_encode(md5('sim'));
-            header("Location: " . ROOT_FOLDER . "index.php");
+            unset($_SESSION['error']);
+            $_SESSION['usuario'] = array(
+              'rg' => $rg,
+              'logado' => base64_encode(md5('sim'))
+            );
+
+            redirectTo('index.php');
+        }else {
+            $errors++;
         }
-    } else {
-        //Retorna para tela de login
-        $_SESSION['error'] = 'Usuário ou senha incorretos.';
-        return sendToLogin();
+    }else {
+        $errors++;
     }
 
+    if($errors > 0) {
+        $_SESSION['error'] = 'Usuário ou senha incorretos.';
+
+        header("Location: " . ROOT_FOLDER . "login.php");
+        exit();
+    }
 }
+
 /**
  * SÓ USEI ESSA FUNÇÃO EMBAIXO PRA CRIAR UMA SENHA E COLAR NO BANCO DE DADOS PQ NÃO TEMOS CADASTRO DE USUÁRIO COM SENHA AINDA, SÓ PRA TESTAR.
  */
