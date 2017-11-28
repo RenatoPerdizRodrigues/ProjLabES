@@ -1,7 +1,6 @@
 <?php
     session_start();
     include_once 'functions.php';
-
 ?>
 
 <!DOCTYPE html>
@@ -20,6 +19,15 @@
 </nav>
 
 <div class="container mt-3" style="width: 350px; position: relative; top: 150px;">
+    <?php
+        if(isset($_SESSION['error']) && $_SESSION['error'] !== '') {
+            echo '<div class="alert alert-danger" role="alert">';
+            echo $_SESSION['error'];
+            echo '</div>';
+
+            unset($_SESSION['error']);
+        }
+    ?>
     <div class="card">
         <div class="card-header">
             <h1 class="h5 m-0">Login</h1>
@@ -29,11 +37,11 @@
             <form action="login.php" method="post">
                 <div class="form-group">
                     <label>RG</label>
-                    <input type="textfield" name="login" class="form-control">
+                    <input type="text" name="login" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>Senha</label>
-                    <input type="textfield" name="senha" class="form-control">
+                    <input type="password" name="senha" class="form-control">
                 </div>
 
                 <button type="submit" name="submit" class="btn btn-primary">Submit</button>
