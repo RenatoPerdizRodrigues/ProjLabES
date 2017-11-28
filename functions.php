@@ -6,12 +6,39 @@ function generateRoute($url) {
     echo ROOT_FOLDER . $url;
 }
 
+function connection() {
+    return mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+}
+
+//Funções de Login
+function authenticate($rg, $senha) {
+    //Criando a query, com o nome das colunas e valores inseridos.
+    $query = "SELECT * FROM usuario WHERE RG = " . $rg;
+
+    $result = mysqli_query(connection(), $query);
+
+    if($result && $result->num_rows > 0) {
+        $usuario = array(
+            'rg' => $rg
+        );
+
+        while($row = mysqli_fetch_assoc($result)) {
+            $usuario['senha'] = $row['senha'];    
+        }    
+
+        if(password_verify($senha, $usuario['senha'])) {
+            die('LOGOU');
+        } else {
+            // $teste = password_hash('123456', PASSWORD_BCRYPT); ## GERANDO UMA PASSWORD CRIPTOGRAFADA SÓ PRA INSERIR MANUALMENTE NO BANCO -> $2y$10$ELle7P61oBPuiAPOYG9XWebjGLUyKVqY9nFvQiinsfJ6o4/Dm4dHO
+            die('Não logou');
+        }
+    }
+}
+authenticate('12345', '123456');
+
 //Funções de Treinador
 function createTrainer($table){
     if (isset($_POST["submit"])) {
-        //Comando que faz a conexão: Local, username, senha (vazia), e nome do BD
-        $connection = mysqli_connect("localhost", "root", "", "xtreme_xcercise");
-
         $nome = $_POST["nome"];
         $sobrenome = $_POST["sobrenome"];
         $idade = $_POST["idade"];
@@ -28,7 +55,7 @@ function createTrainer($table){
 
 
         //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
-        $result = mysqli_query($connection, $query);
+        $result = mysqli_query(connection(), $query);
         if (!$result) {
             echo "Inserção deu errado!";
         } else echo "Inserção deu certo!";
@@ -37,30 +64,22 @@ function createTrainer($table){
 }
 
 function indexTrainer($table){
-    //Comando que faz a conexão: Local, username, senha (vazia), e nome do BD
-    $connection = mysqli_connect("localhost", "root", "", "xtreme_xcercise");
-
-
     //Criando a query, com o nome das colunas e valores inseridos.
     $query = "SELECT * FROM $table";
 
     //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
-    $result = mysqli_query($connection, $query);
+    $result = mysqli_query(connection(), $query);
     if ($result) {
         return $result;
     }
 }
 
 function findTrainer($table, $id){
-    //Comando que faz a conexão: Local, username, senha (vazia), e nome do BD
-    $connection = mysqli_connect("localhost", "root", "", "xtreme_xcercise");
-
-
     //Criando a query, com o nome das colunas e valores inseridos.
     $query = "SELECT * FROM $table WHERE id = " . $id;
 
     //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
-    $result = mysqli_query($connection, $query);
+    $result = mysqli_query(connection(), $query);
     if ($result) {
         //$row = mysqli_fetch_assoc($result);
         return $result;
@@ -68,9 +87,6 @@ function findTrainer($table, $id){
 }
 
 function updateTrainer($table, $dados){
-    //Comando que faz a conexão: Local, username, senha (vazia), e nome do BD
-    $connection = mysqli_connect("localhost", "root", "", "xtreme_xcercise");
-
     $id = $_GET['id'];
     $nome = $dados['username'];
     $sobrenome = $dados['userage'];
@@ -88,7 +104,7 @@ function updateTrainer($table, $dados){
 
 
     //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
-    $result = mysqli_query($connection, $query);
+    $result = mysqli_query(connection(), $query);
     if ($result) {
         echo "Edit deu certo";
     } else echo "Edit deu errado seu BURRO";
@@ -97,15 +113,15 @@ function updateTrainer($table, $dados){
 }
 
 function deleteTrainer($table, $id){
-    //Comando que faz a conexão: Local, username, senha (vazia), e nome do BD
-    $connection = mysqli_connect("localhost", "root", "", "xtreme_xcercise");
+    
+    
 
     //Criando a query, com o nome das colunas e valores inseridos.
     $query = "DELETE FROM $table WHERE id=$id";
 
 
     //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
-    $result = mysqli_query($connection, $query);
+    $result = mysqli_query(connection(), $query);
     if ($result) {
         echo "Delete deu certo";
     } else echo "Delete deu errado seu BURRO";
@@ -114,8 +130,8 @@ function deleteTrainer($table, $id){
 //Funções de Usuário
 function createUser($table){
     if (isset($_POST["submit"])) {
-        //Comando que faz a conexão: Local, username, senha (vazia), e nome do BD
-        $connection = mysqli_connect("localhost", "root", "", "xtreme_xcercise");
+        
+        
 
 
         $nome = $_POST["nome"];
@@ -132,7 +148,7 @@ function createUser($table){
         $query = "INSERT INTO $table(nome, sobrenome, idade, RG, CPF, sexo, altura, peso) VALUES ('$nome', '$sobrenome', '$idade' ,'$rg' ,'$cpf' , '$sexo', '$altura', '$peso')";
 
         //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
-        $result = mysqli_query($connection, $query);
+        $result = mysqli_query(connection(), $query);
         if (!$result) {
             echo "Inserção deu errado!";
         } else echo "Inserção deu certo!";
@@ -141,29 +157,29 @@ function createUser($table){
 }
 
 function indexUser($table){
-    //Comando que faz a conexão: Local, username, senha (vazia), e nome do BD
-    $connection = mysqli_connect("localhost", "root", "", "xtreme_xcercise");
+    
+    
 
     //Criando a query, com o nome das colunas e valores inseridos.
     $query = "SELECT * FROM $table";
 
     //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
-    $result = mysqli_query($connection, $query);
+    $result = mysqli_query(connection(), $query);
     if ($result) {
         return $result;
     }
 }
 
 function findUser($table, $id){
-    //Comando que faz a conexão: Local, username, senha (vazia), e nome do BD
-    $connection = mysqli_connect("localhost", "root", "", "xtreme_xcercise");
+    
+    
 
 
     //Criando a query, com o nome das colunas e valores inseridos.
     $query = "SELECT * FROM $table WHERE id = " . $id;
 
     //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
-    $result = mysqli_query($connection, $query);
+    $result = mysqli_query(connection(), $query);
     if ($result) {
         //$row = mysqli_fetch_assoc($result);
         return $result;
@@ -171,8 +187,8 @@ function findUser($table, $id){
 }
 
 function updateUser($table, $dados){
-    //Comando que faz a conexão: Local, username, senha (vazia), e nome do BD
-    $connection = mysqli_connect("localhost", "root", "", "xtreme_xcercise");
+    
+    
 
     $id = $_GET['id'];
     $nome = $dados['nome'];
@@ -189,7 +205,7 @@ function updateUser($table, $dados){
 
 
     //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
-    $result = mysqli_query($connection, $query);
+    $result = mysqli_query(connection(), $query);
     if ($result) {
         echo "Edit deu certo";
     } else echo "Edit deu errado seu BURRO";
@@ -198,15 +214,15 @@ function updateUser($table, $dados){
 }
 
 function deleteUser($table, $id){
-    //Comando que faz a conexão: Local, username, senha (vazia), e nome do BD
-    $connection = mysqli_connect("localhost", "root", "", "xtreme_xcercise");
+    
+    
 
     //Criando a query, com o nome das colunas e valores inseridos.
     $query = "DELETE FROM $table WHERE id=$id";
 
 
     //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
-    $result = mysqli_query($connection, $query);
+    $result = mysqli_query(connection(), $query);
     if ($result) {
         echo "Delete deu certo";
     } else echo "Delete deu errado seu BURRO";
@@ -215,8 +231,8 @@ function deleteUser($table, $id){
 //Funções de Exercício
 function createExercise($table){
     if(isset($_POST["submit"])){
-        //Comando que faz a conexão: Local, username, senha (vazia), e nome do BD
-        $connection = mysqli_connect("localhost", "root", "", "xtreme_xcercise");
+        
+        
 
         $nome = $_POST["nome"];
         $descricao = $_POST["descricao"];
@@ -225,7 +241,7 @@ function createExercise($table){
         $query = "INSERT INTO $table(nome, descricao) VALUES ('$nome', '$descricao')";
 
         //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
-        $result = mysqli_query($connection, $query);
+        $result = mysqli_query(connection(), $query);
         if(!$result){
             echo "Inserção deu errado!";
         } else echo "Inserção deu certo!";
@@ -233,15 +249,15 @@ function createExercise($table){
 }
 
 function indexExercise($table){
-    //Comando que faz a conexão: Local, username, senha (vazia), e nome do BD
-    $connection = mysqli_connect("localhost", "root", "", "xtreme_xcercise");
+    
+    
 
 
     //Criando a query, com o nome das colunas e valores inseridos.
     $query = "SELECT * FROM $table";
 
     //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
-    $result = mysqli_query($connection, $query);
+    $result = mysqli_query(connection(), $query);
     if ($result) {
         //$row = mysqli_fetch_assoc($result);
         return $result;
@@ -249,14 +265,14 @@ function indexExercise($table){
 }
 
 function findExercise($table, $id){
-    //Comando que faz a conexão: Local, username, senha (vazia), e nome do BD
-    $connection = mysqli_connect("localhost", "root", "", "xtreme_xcercise");
+    
+    
 
     //Criando a query, com o nome das colunas e valores inseridos.
     $query = "SELECT * FROM $table WHERE exercicioID = " . $id;
 
     //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
-    $result = mysqli_query($connection, $query);
+    $result = mysqli_query(connection(), $query);
     if ($result) {
         //$row = mysqli_fetch_assoc($result);
         return $result;
@@ -264,14 +280,14 @@ function findExercise($table, $id){
 }
 
 function findExerciseArray($table, $id){
-    //Comando que faz a conexão: Local, username, senha (vazia), e nome do BD
-    $connection = mysqli_connect("localhost", "root", "", "xtreme_xcercise");
+    
+    
 
     //Criando a query, com o nome das colunas e valores inseridos.
     $query = "SELECT * FROM $table WHERE exercicioID = " . $id;
 
     $data = array();
-    $result = mysqli_query($connection, $query);
+    $result = mysqli_query(connection(), $query);
 
     if ($result) {
         while($row = mysqli_fetch_assoc($result)) {
@@ -283,8 +299,8 @@ function findExerciseArray($table, $id){
 }
 
 function updateExercise($table, $dados){
-    //Comando que faz a conexão: Local, username, senha (vazia), e nome do BD
-    $connection = mysqli_connect("localhost", "root", "", "xtreme_xcercise");
+    
+    
 
     $id = $_GET['id'];
     $nome = $dados['nome'];
@@ -297,7 +313,7 @@ function updateExercise($table, $dados){
 
 
     //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
-    $result = mysqli_query($connection, $query);
+    $result = mysqli_query(connection(), $query);
     if ($result) {
         echo "Edit deu certo";
     } else echo "Edit deu errado seu BURRO";
@@ -306,15 +322,15 @@ function updateExercise($table, $dados){
 }
 
 function deleteExercise($table, $id){
-    //Comando que faz a conexão: Local, username, senha (vazia), e nome do BD
-    $connection = mysqli_connect("localhost", "root", "", "xtreme_xcercise");
+    
+    
 
     //Criando a query, com o nome das colunas e valores inseridos.
     $query = "DELETE FROM $table WHERE exercicioID=$id";
 
 
     //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
-    $result = mysqli_query($connection, $query);
+    $result = mysqli_query(connection(), $query);
     if ($result) {
         echo "Delete deu certo";
     } else echo "Delete deu errado seu BURRO";
@@ -323,8 +339,8 @@ function deleteExercise($table, $id){
 //Funções de Aparelho
 function createMachine($table){
     if (isset($_POST["submit"])) {
-        //Comando que faz a conexão: Local, username, senha (vazia), e nome do BD
-        $connection = mysqli_connect("localhost", "root", "", "xtreme_xcercise");
+        
+        
 
         $marca = $_POST["modelo"];
         $modelo = $_POST["marca"];
@@ -337,7 +353,7 @@ function createMachine($table){
 
 
         //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
-        $result = mysqli_query($connection, $query);
+        $result = mysqli_query(connection(), $query);
         if (!$result) {
             echo "Inserção deu errado!";
         } else echo "Inserção deu certo!";
@@ -346,30 +362,30 @@ function createMachine($table){
 }
 
 function indexMachine($table){
-    //Comando que faz a conexão: Local, username, senha (vazia), e nome do BD
-    $connection = mysqli_connect("localhost", "root", "", "xtreme_xcercise");
+    
+    
 
 
     //Criando a query, com o nome das colunas e valores inseridos.
     $query = "SELECT * FROM $table";
 
     //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
-    $result = mysqli_query($connection, $query);
+    $result = mysqli_query(connection(), $query);
     if ($result) {
         return $result;
     }
 }
 
 function findMachine($table, $id){
-    //Comando que faz a conexão: Local, username, senha (vazia), e nome do BD
-    $connection = mysqli_connect("localhost", "root", "", "xtreme_xcercise");
+    
+    
 
 
     //Criando a query, com o nome das colunas e valores inseridos.
     $query = "SELECT * FROM $table WHERE aparelhoID = " . $id;
 
     //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
-    $result = mysqli_query($connection, $query);
+    $result = mysqli_query(connection(), $query);
     if ($result) {
         //$row = mysqli_fetch_assoc($result);
         return $result;
@@ -377,14 +393,14 @@ function findMachine($table, $id){
 }
 
 function findMachineArray($table, $id){
-    //Comando que faz a conexão: Local, username, senha (vazia), e nome do BD
-    $connection = mysqli_connect("localhost", "root", "", "xtreme_xcercise");
+    
+    
 
     //Criando a query, com o nome das colunas e valores inseridos.
     $query = "SELECT * FROM $table WHERE aparelhoID = " . $id;
 
     $data = array();
-    $result = mysqli_query($connection, $query);
+    $result = mysqli_query(connection(), $query);
 
     if ($result) {
         while($row = mysqli_fetch_assoc($result)) {
@@ -396,8 +412,8 @@ function findMachineArray($table, $id){
 }
 
 function updateMachine($table, $dados){
-    //Comando que faz a conexão: Local, username, senha (vazia), e nome do BD
-    $connection = mysqli_connect("localhost", "root", "", "xtreme_xcercise");
+    
+    
 
     $id = $_GET['id'];
     $marca = $dados["marca"];
@@ -411,7 +427,7 @@ function updateMachine($table, $dados){
 
 
     //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
-    $result = mysqli_query($connection, $query);
+    $result = mysqli_query(connection(), $query);
     if ($result) {
         echo "Edit deu certo";
     } else echo "Edit deu errado seu BURRO";
@@ -420,15 +436,15 @@ function updateMachine($table, $dados){
 }
 
 function deleteMachine($table, $id){
-    //Comando que faz a conexão: Local, username, senha (vazia), e nome do BD
-    $connection = mysqli_connect("localhost", "root", "", "xtreme_xcercise");
+    
+    
 
     //Criando a query, com o nome das colunas e valores inseridos.
     $query = "DELETE FROM $table WHERE aparelhoID=$id";
 
 
     //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
-    $result = mysqli_query($connection, $query);
+    $result = mysqli_query(connection(), $query);
     if ($result) {
         echo "Delete deu certo";
     } else echo "Delete deu errado seu BURRO";
@@ -437,15 +453,15 @@ function deleteMachine($table, $id){
 
 //Funções de Rotina
 function findAllMachines(){
-    //Comando que faz a conexão: Local, username, senha (vazia), e nome do BD
-    $connection = mysqli_connect("localhost", "root", "", "xtreme_xcercise");
+    
+    
 
 
     //Criando a query, com o nome das colunas e valores inseridos.
     $query = "SELECT * FROM aparelho";
 
     //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
-    $result = mysqli_query($connection, $query);
+    $result = mysqli_query(connection(), $query);
     if ($result) {
         return $result;
     }
@@ -454,15 +470,15 @@ function findAllMachines(){
 }
 
 function findAllExercises(){
-    //Comando que faz a conexão: Local, username, senha (vazia), e nome do BD
-    $connection = mysqli_connect("localhost", "root", "", "xtreme_xcercise");
+    
+    
 
 
     //Criando a query, com o nome das colunas e valores inseridos.
     $query = "SELECT * FROM exercicio";
 
     //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
-    $result = mysqli_query($connection, $query);
+    $result = mysqli_query(connection(), $query);
     if ($result) {
         return $result;
     }
@@ -472,8 +488,8 @@ function findAllExercises(){
 
 function createRoutine($table){
     if (isset($_POST["submit"])) {
-        //Comando que faz a conexão: Local, username, senha (vazia), e nome do BD
-        $connection = mysqli_connect("localhost", "root", "", "xtreme_xcercise");
+        
+        
 
 
         $id = $_GET['id'];
@@ -505,7 +521,7 @@ function createRoutine($table){
         var_dump($query);
 
         //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
-        $result = mysqli_query($connection, $query);
+        $result = mysqli_query(connection(), $query);
         if (!$result) {
             echo "Inserção deu errado!";
         } else echo "Inserção deu certo!";
@@ -514,23 +530,23 @@ function createRoutine($table){
 }
 
 function indexRoutine($table){
-    //Comando que faz a conexão: Local, username, senha (vazia), e nome do BD
-    $connection = mysqli_connect("localhost", "root", "", "xtreme_xcercise");
+    
+    
 
 
     //Criando a query, com o nome das colunas e valores inseridos.
     $query = "SELECT * FROM $table";
 
     //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
-    $result = mysqli_query($connection, $query);
+    $result = mysqli_query(connection(), $query);
     if ($result) {
         return $result;
     }
 }
 
 function findRoutine($table, $id){
-    //Comando que faz a conexão: Local, username, senha (vazia), e nome do BD
-    $connection = mysqli_connect("localhost", "root", "", "xtreme_xcercise");
+    
+    
 
 
     //Criando a query, com o nome das colunas e valores inseridos.
@@ -538,13 +554,13 @@ function findRoutine($table, $id){
     $query = "SELECT * FROM $table WHERE rotinaID = " . $id . "";
 
     $data = array();
-    $result = mysqli_query($connection, $query);
+    $result = mysqli_query(connection(), $query);
     if ($result) {
         while($row = mysqli_fetch_assoc($result)) {
             $data[] = $row;
         }
 
-        $connection->close();
+        connection()->close();
         return $data;
     }
 
@@ -553,8 +569,8 @@ function findRoutine($table, $id){
 }
 
 function updateRoutine($table, $dados){
-    //Comando que faz a conexão: Local, username, senha (vazia), e nome do BD
-    $connection = mysqli_connect("localhost", "root", "", "xtreme_xcercise");
+    
+    
 
     $id = $_GET['id'];
     $marca = $dados["marca"];
@@ -568,7 +584,7 @@ function updateRoutine($table, $dados){
 
 
     //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
-    $result = mysqli_query($connection, $query);
+    $result = mysqli_query(connection(), $query);
     if ($result) {
         echo "Edit deu certo";
     } else echo "Edit deu errado seu BURRO";
@@ -577,15 +593,15 @@ function updateRoutine($table, $dados){
 }
 
 function deleteRoutine($table, $id){
-    //Comando que faz a conexão: Local, username, senha (vazia), e nome do BD
-    $connection = mysqli_connect("localhost", "root", "", "xtreme_xcercise");
+    
+    
 
     //Criando a query, com o nome das colunas e valores inseridos.
     $query = "DELETE FROM $table WHERE aparelhoID=$id";
 
 
     //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
-    $result = mysqli_query($connection, $query);
+    $result = mysqli_query(connection(), $query);
     if ($result) {
         echo "Delete deu certo";
     } else echo "Delete deu errado seu BURRO";
