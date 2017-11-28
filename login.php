@@ -13,18 +13,16 @@
     <link href="css/stylesheetjr.css" rel="stylesheet">
 </head>
 <body>
-    <?php include_once 'header.php'; ?>
-
-    <div class="welcome">
-        <h1>Olá, administrador!</h1>
-        <?php echo "<h4>Hoje é dia " . date("d/m/y</h4>");?>
-    </div>
+<div class="welcome">
+    <h1>Olá, administrador!</h1>
+    <?php echo "<h4>Hoje é dia " . date("d/m/y</h4>");?>
+</div>
 
 
 
-    <script src="js/libs/jquery.min.js"></script>
-    <script src="js/libs/tether.min.js"></script>
-    <script src="js/libs/bootstrap.min.js"></script>
-    <script src="js/libs/pace.min.js"></script>
+<script src="js/libs/jquery.min.js"></script>
+<script src="js/libs/tether.min.js"></script>
+<script src="js/libs/bootstrap.min.js"></script>
+<script src="js/libs/pace.min.js"></script>
 </body>
 </html>

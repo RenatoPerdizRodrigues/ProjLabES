@@ -1,20 +1,32 @@
 <?php
 include_once 'config.php';
 
-// generate urls according to root folder
+//Gera URLS absolutas
 function generateRoute($url) {
     echo ROOT_FOLDER . $url;
 }
 
+//Conexão
 function connection() {
     return mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 }
 
 //Funções de Login
-function authenticate($rg, $senha) {
+function sendToLogin($paginaAtual) {
+    // Se o usuário não estiver na página Login, redireciona
+    $urlAtual = $_SERVER[REQUEST_URI];
+    $paginaAtual = substr($urlAtual, strrpos($urlAtual, '/') + 1);
+
+    if($paginaAtual !== 'login.php') {
+        header("Location: " . ROOT_FOLDER . "login.php");
+    } else {
+        return false;
+    }
+}
+
+function login($rg, $senha) {
     //Criando a query, com o nome das colunas e valores inseridos.
     $query = "SELECT * FROM usuario WHERE RG = " . $rg;
-
     $result = mysqli_query(connection(), $query);
 
     if($result && $result->num_rows > 0) {
@@ -22,19 +34,49 @@ function authenticate($rg, $senha) {
             'rg' => $rg
         );
 
+        //Somente pega senha se existir uma linha em $result
         while($row = mysqli_fetch_assoc($result)) {
-            $usuario['senha'] = $row['senha'];    
-        }    
+            $usuario['senha'] = $row['senha'];
+        }
 
+        //Verifica se a senha digitada é igual a senha criptografada do banco com a função do PHP
         if(password_verify($senha, $usuario['senha'])) {
-            die('LOGOU');
-        } else {
-            // $teste = password_hash('123456', PASSWORD_BCRYPT); ## GERANDO UMA PASSWORD CRIPTOGRAFADA SÓ PRA INSERIR MANUALMENTE NO BANCO -> $2y$10$ELle7P61oBPuiAPOYG9XWebjGLUyKVqY9nFvQiinsfJ6o4/Dm4dHO
-            die('Não logou');
+            //Inicia sessão pra logar usuário
+            session_start();
+            $_SESSION['usuario']['rg'] = $rg;
+            $_SESSION['usuario']['logado'] = base64_encode(md5('sim'));
+        }else {
+            //Retorna para tela de login
+            return sendToLogin();
         }
     }
+
 }
-authenticate('12345', '123456');
+/**
+ * SÓ USEI ESSA FUNÇÃO EMBAIXO PRA CRIAR UMA SENHA E COLAR NO BANCO DE DADOS PQ NÃO TEMOS CADASTRO DE USUÁRIO COM SENHA AINDA, SÓ PRA TESTAR.
+ */
+// $teste = password_hash('123456', PASSWORD_BCRYPT); ## GERANDO UMA PASSWORD CRIPTOGRAFADA SÓ PRA INSERIR MANUALMENTE NO BANCO -> $2y$10$ELle7P61oBPuiAPOYG9XWebjGLUyKVqY9nFvQiinsfJ6o4/Dm4dHO
+
+//Chama a função de login (Somente para teste, deve ser feito no $_POST da tela de login)
+login('12345', '123456');
+
+//Valida SESSION do usuário
+function auth() {
+    if(!isset($_SESSION['usuario']['logado']) && $_SESSION['usuario']['logado'] !== base64_encode(md5('sim'))) {
+        return sendToLogin();
+    }
+}
+
+//Desloga usuário
+function logout() {
+    session_start();
+    unset($_SESSION['usuario']);
+    session_destroy();
+
+    if(!isset($_SESSION['usuario'])) {
+        return sendToLogin();
+    }
+}
 
 //Funções de Treinador
 function createTrainer($table){
@@ -113,8 +155,8 @@ function updateTrainer($table, $dados){
 }
 
 function deleteTrainer($table, $id){
-    
-    
+
+
 
     //Criando a query, com o nome das colunas e valores inseridos.
     $query = "DELETE FROM $table WHERE id=$id";
@@ -130,8 +172,8 @@ function deleteTrainer($table, $id){
 //Funções de Usuário
 function createUser($table){
     if (isset($_POST["submit"])) {
-        
-        
+
+
 
 
         $nome = $_POST["nome"];
@@ -157,8 +199,8 @@ function createUser($table){
 }
 
 function indexUser($table){
-    
-    
+
+
 
     //Criando a query, com o nome das colunas e valores inseridos.
     $query = "SELECT * FROM $table";
@@ -171,8 +213,8 @@ function indexUser($table){
 }
 
 function findUser($table, $id){
-    
-    
+
+
 
 
     //Criando a query, com o nome das colunas e valores inseridos.
@@ -187,8 +229,8 @@ function findUser($table, $id){
 }
 
 function updateUser($table, $dados){
-    
-    
+
+
 
     $id = $_GET['id'];
     $nome = $dados['nome'];
@@ -214,8 +256,8 @@ function updateUser($table, $dados){
 }
 
 function deleteUser($table, $id){
-    
-    
+
+
 
     //Criando a query, com o nome das colunas e valores inseridos.
     $query = "DELETE FROM $table WHERE id=$id";
@@ -231,8 +273,8 @@ function deleteUser($table, $id){
 //Funções de Exercício
 function createExercise($table){
     if(isset($_POST["submit"])){
-        
-        
+
+
 
         $nome = $_POST["nome"];
         $descricao = $_POST["descricao"];
@@ -249,8 +291,8 @@ function createExercise($table){
 }
 
 function indexExercise($table){
-    
-    
+
+
 
 
     //Criando a query, com o nome das colunas e valores inseridos.
@@ -265,8 +307,8 @@ function indexExercise($table){
 }
 
 function findExercise($table, $id){
-    
-    
+
+
 
     //Criando a query, com o nome das colunas e valores inseridos.
     $query = "SELECT * FROM $table WHERE exercicioID = " . $id;
@@ -280,8 +322,8 @@ function findExercise($table, $id){
 }
 
 function findExerciseArray($table, $id){
-    
-    
+
+
 
     //Criando a query, com o nome das colunas e valores inseridos.
     $query = "SELECT * FROM $table WHERE exercicioID = " . $id;
@@ -299,8 +341,8 @@ function findExerciseArray($table, $id){
 }
 
 function updateExercise($table, $dados){
-    
-    
+
+
 
     $id = $_GET['id'];
     $nome = $dados['nome'];
@@ -322,8 +364,8 @@ function updateExercise($table, $dados){
 }
 
 function deleteExercise($table, $id){
-    
-    
+
+
 
     //Criando a query, com o nome das colunas e valores inseridos.
     $query = "DELETE FROM $table WHERE exercicioID=$id";
@@ -339,8 +381,8 @@ function deleteExercise($table, $id){
 //Funções de Aparelho
 function createMachine($table){
     if (isset($_POST["submit"])) {
-        
-        
+
+
 
         $marca = $_POST["modelo"];
         $modelo = $_POST["marca"];
@@ -362,8 +404,8 @@ function createMachine($table){
 }
 
 function indexMachine($table){
-    
-    
+
+
 
 
     //Criando a query, com o nome das colunas e valores inseridos.
@@ -377,8 +419,8 @@ function indexMachine($table){
 }
 
 function findMachine($table, $id){
-    
-    
+
+
 
 
     //Criando a query, com o nome das colunas e valores inseridos.
@@ -393,8 +435,8 @@ function findMachine($table, $id){
 }
 
 function findMachineArray($table, $id){
-    
-    
+
+
 
     //Criando a query, com o nome das colunas e valores inseridos.
     $query = "SELECT * FROM $table WHERE aparelhoID = " . $id;
@@ -412,8 +454,8 @@ function findMachineArray($table, $id){
 }
 
 function updateMachine($table, $dados){
-    
-    
+
+
 
     $id = $_GET['id'];
     $marca = $dados["marca"];
@@ -436,8 +478,8 @@ function updateMachine($table, $dados){
 }
 
 function deleteMachine($table, $id){
-    
-    
+
+
 
     //Criando a query, com o nome das colunas e valores inseridos.
     $query = "DELETE FROM $table WHERE aparelhoID=$id";
@@ -453,8 +495,8 @@ function deleteMachine($table, $id){
 
 //Funções de Rotina
 function findAllMachines(){
-    
-    
+
+
 
 
     //Criando a query, com o nome das colunas e valores inseridos.
@@ -470,8 +512,8 @@ function findAllMachines(){
 }
 
 function findAllExercises(){
-    
-    
+
+
 
 
     //Criando a query, com o nome das colunas e valores inseridos.
@@ -488,8 +530,8 @@ function findAllExercises(){
 
 function createRoutine($table){
     if (isset($_POST["submit"])) {
-        
-        
+
+
 
 
         $id = $_GET['id'];
@@ -530,8 +572,8 @@ function createRoutine($table){
 }
 
 function indexRoutine($table){
-    
-    
+
+
 
 
     //Criando a query, com o nome das colunas e valores inseridos.
@@ -545,8 +587,8 @@ function indexRoutine($table){
 }
 
 function findRoutine($table, $id){
-    
-    
+
+
 
 
     //Criando a query, com o nome das colunas e valores inseridos.
@@ -569,8 +611,8 @@ function findRoutine($table, $id){
 }
 
 function updateRoutine($table, $dados){
-    
-    
+
+
 
     $id = $_GET['id'];
     $marca = $dados["marca"];
@@ -593,8 +635,8 @@ function updateRoutine($table, $dados){
 }
 
 function deleteRoutine($table, $id){
-    
-    
+
+
 
     //Criando a query, com o nome das colunas e valores inseridos.
     $query = "DELETE FROM $table WHERE aparelhoID=$id";
