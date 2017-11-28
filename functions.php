@@ -255,15 +255,11 @@ function findExercise($table, $id){
     //Criando a query, com o nome das colunas e valores inseridos.
     $query = "SELECT * FROM $table WHERE exercicioID = " . $id;
 
-    $data = array();
+    //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
     $result = mysqli_query($connection, $query);
-
     if ($result) {
-        while($row = mysqli_fetch_assoc($result)) {
-            $data[] = $row;
-        }
-
-        return $data;
+        //$row = mysqli_fetch_assoc($result);
+        return $result;
     }
 }
 
