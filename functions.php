@@ -188,7 +188,7 @@ function createUser($table){
 
 
         //Criando a query, com o nome das colunas e valores inseridos.
-        $query = "INSERT INTO $table(nome, sobrenome, idade, RG, CPF, sexo, altura, peso, senha, permissao) VALUES ('$nome', '$sobrenome', '$idade' ,'$rg' ,'$cpf' , '$sexo', '$altura', '$peso', '$senha', 0)";
+        $query = "INSERT INTO $table(nome, sobrenome, idade, RG, CPF, sexo, altura, peso, senha, permissao, temrotina) VALUES ('$nome', '$sobrenome', '$idade' ,'$rg' ,'$cpf' , '$sexo', '$altura', '$peso', '$senha', 0, 0)";
 
         //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
         $result = mysqli_query(connection(), $query);
@@ -397,6 +397,7 @@ function createMachine($table){
 
         //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
         $result = mysqli_query(connection(), $query);
+        var_dump($query);
         if (!$result) {
             echo "Inserção deu errado!";
         } else echo "Inserção deu certo!";
@@ -561,15 +562,21 @@ function createRoutine($table){
         //Criando a query, com o nome das colunas e valores inseridos.
         $query = "INSERT INTO $table(rotinaID, ex1, ap1, rep1,ex2, ap2, rep2,ex3, ap3, rep3,ex4, ap4, rep4,ex5, ap5, rep5) VALUES ('$id', '$ex1', '$ap1', '$rep1' ,'$ex2', '$ap2', '$rep2' ,'$ex3', '$ap3', '$rep3' ,'$ex4', '$ap4', '$rep4' ,'$ex5', '$ap5', '$rep5')";
 
-        var_dump($query);
 
         //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
         $result = mysqli_query(connection(), $query);
-        if (!$result) {
-            echo "Inserção deu errado!";
-        } else echo "Inserção deu certo!";
+        var_dump($result);
+        if ($result) {
+            echo "Inserção deu certo!";
+            setRoutine($id);
+        } else echo "Inserção deu errado!";
     }
 
+}
+
+function setRoutine($id){
+            $query = "UPDATE TABLE usuario SET temrotina='1' WHERE ID=$id";
+            mysqli_query(connection(), $query);
 }
 
 function indexRoutine($table){
