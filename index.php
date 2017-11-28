@@ -17,7 +17,7 @@
 
     <div class="welcome">
         <h1>Olá, administrador!</h1>
-        <?php echo "<h4>Hoje é dia " . date("d/m/y</h4>");?>
+        <h4>Você está logado</h4>
     </div>
 
 

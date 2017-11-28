@@ -12,9 +12,9 @@ function connection() {
 }
 
 //Funções de Login
-function sendToLogin($paginaAtual) {
+function sendToLogin() {
     // Se o usuário não estiver na página Login, redireciona
-    $urlAtual = $_SERVER[REQUEST_URI];
+    $urlAtual = $_SERVER['REQUEST_URI'];
     $paginaAtual = substr($urlAtual, strrpos($urlAtual, '/') + 1);
 
     if($paginaAtual !== 'login.php') {
@@ -42,13 +42,14 @@ function login($rg, $senha) {
         //Verifica se a senha digitada é igual a senha criptografada do banco com a função do PHP
         if(password_verify($senha, $usuario['senha'])) {
             //Inicia sessão pra logar usuário
-            session_start();
             $_SESSION['usuario']['rg'] = $rg;
             $_SESSION['usuario']['logado'] = base64_encode(md5('sim'));
-        }else {
-            //Retorna para tela de login
-            return sendToLogin();
+            header("Location: " . ROOT_FOLDER . "index.php");
         }
+    } else {
+        //Retorna para tela de login
+        $_SESSION['error'] = 'Usuário ou senha incorretos.';
+        return sendToLogin();
     }
 
 }
@@ -57,8 +58,7 @@ function login($rg, $senha) {
  */
 // $teste = password_hash('123456', PASSWORD_BCRYPT); ## GERANDO UMA PASSWORD CRIPTOGRAFADA SÓ PRA INSERIR MANUALMENTE NO BANCO -> $2y$10$ELle7P61oBPuiAPOYG9XWebjGLUyKVqY9nFvQiinsfJ6o4/Dm4dHO
 
-//Chama a função de login (Somente para teste, deve ser feito no $_POST da tela de login)
-login('12345', '123456');
+
 
 //Valida SESSION do usuário
 function auth() {
@@ -90,10 +90,10 @@ function createTrainer($table){
         $sal = $_POST["salario"];
         $datac = $_POST["datacontratacao"];
         $situacao = $_POST["ativo"];
-
+        $senha = password_hash($_POST["senha"], PASSWORD_BCRYPT);
 
         //Criando a query, com o nome das colunas e valores inseridos.
-        $query = "INSERT INTO $table(nome, sobrenome, idade, RG, CPF, carteiraTrab, salario, dataContratacao, situacao) VALUES ('$nome', '$sobrenome', '$idade' ,'$rg' ,'$cpf' ,'$cart' ,'$sal' ,'$datac' ,'$situacao')";
+        $query = "INSERT INTO $table(nome, sobrenome, idade, RG, CPF, carteiraTrab, salario, dataContratacao, situacao, senha, permissao) VALUES ('$nome', '$sobrenome', '$idade' ,'$rg' ,'$cpf' ,'$cart' ,'$sal' ,'$datac' ,'$situacao', '$senha', '1')";
 
 
         //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
@@ -184,10 +184,11 @@ function createUser($table){
         $sexo = $_POST["sexo"];
         $altura = $_POST["altura"];
         $peso = $_POST["peso"];
+        $senha = password_hash($_POST["senha"], PASSWORD_BCRYPT);
 
 
         //Criando a query, com o nome das colunas e valores inseridos.
-        $query = "INSERT INTO $table(nome, sobrenome, idade, RG, CPF, sexo, altura, peso) VALUES ('$nome', '$sobrenome', '$idade' ,'$rg' ,'$cpf' , '$sexo', '$altura', '$peso')";
+        $query = "INSERT INTO $table(nome, sobrenome, idade, RG, CPF, sexo, altura, peso, senha, permissao) VALUES ('$nome', '$sobrenome', '$idade' ,'$rg' ,'$cpf' , '$sexo', '$altura', '$peso', '$senha', 0)";
 
         //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
         $result = mysqli_query(connection(), $query);

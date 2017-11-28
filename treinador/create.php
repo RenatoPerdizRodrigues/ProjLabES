@@ -67,6 +67,10 @@ include_once '../functions.php';
                         Inativo
                     </label>
                 </div>
+                <div class="form-group">
+                    <label>Senha</label>
+                    <input type="password" name="senha" class="form-control">
+                </div>
                 <br>
 
                 <button type="submit" name="submit" class="btn btn-primary">Submit</button>

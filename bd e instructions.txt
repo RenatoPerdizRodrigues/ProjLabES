@@ -1,4 +1,4 @@
-create database xtreme_xcercise
+create database xtreme_xcercise;
 
 CREATE TABLE treinador(
 	id int auto_increment PRIMARY KEY,
@@ -14,7 +14,7 @@ CREATE TABLE treinador(
 );
 
 CREATE TABLE exercicio(
-	exercicioID int auto_increment PRIMARY KEY,
+	exercicioID int PRIMARY KEY,
 	nome varchar(35),
 	descricao varchar(200)
 );
@@ -29,18 +29,18 @@ CREATE TABLE usuario(
 	sexo varchar(9),
 	altura float,
 	peso double
-)
+);
 
 CREATE TABLE aparelho(
-	aparelhoID int auto_increment PRIMARY KEY,
+	aparelhoID int PRIMARY KEY,
 	marca varchar(35),
 	modelo varchar(35),
 	dataAquisicao date,
 	ultimaManutencao date
-)
+);
 
 CREATE TABLE rotina(
-	rotinaID int auto_increment PRIMARY KEY,
+	rotinaID int PRIMARY KEY,
 	ex1 int,
 	ap1 int,
 	rep1 int,
@@ -66,16 +66,8 @@ CREATE TABLE rotina(
 	FOREIGN KEY (ap3) REFERENCES aparelho(aparelhoID),
 	FOREIGN KEY (ap4) REFERENCES aparelho(aparelhoID),
 	FOREIGN KEY (ap5) REFERENCES aparelho(aparelhoID)
-)
+);
 
-
-CREATE TABLE 
-
-INSERT INTO treinador(nome, idade, RG, CPF, carteiraTrab, salario, dataContratacao, situação) VALUES ('231', '32134131' ,'314413' ,'31231' ,'413241' ,'12321' ,'1222-12-12' ,'Ativo')
 
 PROX//
 Edit de treinador está deixando a situação em branco pq não tem campo, mudar pra sempre ativo
-Criar o informações com todos os campos
-Clicar a função inativar que deixa o campo como inativo
-
-

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 28-Nov-2017 às 01:58
+-- Generation Time: 28-Nov-2017 às 03:10
 -- Versão do servidor: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -36,14 +36,6 @@ CREATE TABLE `aparelho` (
   `ultimaManutencao` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Extraindo dados da tabela `aparelho`
---
-
-INSERT INTO `aparelho` (`aparelhoID`, `marca`, `modelo`, `dataAquisicao`, `ultimaManutencao`) VALUES
-(4, 'Nakagym', 'Aparelho1', '0000-00-00', '0000-00-00'),
-(5, 'Aparelho2', 'Aparelho2', '0010-01-01', '0101-01-01');
-
 -- --------------------------------------------------------
 
 --
@@ -55,14 +47,6 @@ CREATE TABLE `exercicio` (
   `nome` varchar(35) DEFAULT NULL,
   `descricao` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `exercicio`
---
-
-INSERT INTO `exercicio` (`exercicioID`, `nome`, `descricao`) VALUES
-(3, 'Abdominal', 'Azul'),
-(4, 'AbdominalGay', 'Ã‰ bom');
 
 -- --------------------------------------------------------
 
@@ -89,14 +73,6 @@ CREATE TABLE `rotina` (
   `rep5` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Extraindo dados da tabela `rotina`
---
-
-INSERT INTO `rotina` (`rotinaID`, `ex1`, `ap1`, `rep1`, `ex2`, `ap2`, `rep2`, `ex3`, `ap3`, `rep3`, `ex4`, `ap4`, `rep4`, `ex5`, `ap5`, `rep5`) VALUES
-(2, 3, 4, 2, 3, 4, 2, 3, 4, 2, 3, 4, 2, 3, 4, 2),
-(3, 4, 5, 2, 4, 5, 2, 4, 5, 2, 4, 5, 2, 4, 5, 2);
-
 -- --------------------------------------------------------
 
 --
@@ -116,13 +92,6 @@ CREATE TABLE `treinador` (
   `situacao` varchar(7) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Extraindo dados da tabela `treinador`
---
-
-INSERT INTO `treinador` (`id`, `nome`, `sobrenome`, `idade`, `RG`, `CPF`, `carteiraTrab`, `salario`, `dataContratacao`, `situacao`) VALUES
-(3, 'Jooji', 'Ueda', 21, '123', '123', '123', 123, '2017-01-01', 'Ativo');
-
 -- --------------------------------------------------------
 
 --
@@ -140,14 +109,6 @@ CREATE TABLE `usuario` (
   `altura` float DEFAULT NULL,
   `peso` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `usuario`
---
-
-INSERT INTO `usuario` (`id`, `nome`, `sobrenome`, `idade`, `RG`, `CPF`, `sexo`, `altura`, `peso`) VALUES
-(2, 'Renato', 'Rodrigues', 22, '12345', '12345', 'Masculino', 123, 123),
-(3, 'Lorran', 'David', 21, '13245', '12345', 'Outro', 185, 12345);
 
 --
 -- Indexes for dumped tables
@@ -198,28 +159,16 @@ ALTER TABLE `usuario`
 --
 
 --
--- AUTO_INCREMENT for table `aparelho`
---
-ALTER TABLE `aparelho`
-  MODIFY `aparelhoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `exercicio`
---
-ALTER TABLE `exercicio`
-  MODIFY `exercicioID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
 -- AUTO_INCREMENT for table `treinador`
 --
 ALTER TABLE `treinador`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
