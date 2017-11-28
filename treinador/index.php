@@ -52,7 +52,10 @@ $var = indexTrainer($table);
                 echo "<td>" . $row['situacao'] . "</td>";
                 echo "<td>";
                 echo "<a class=\"btn btn-primary mr-1\" href=\"show.php?id=" . $row['id'] . " \" role=\"button\">Informações</a>";
-                echo "<a class=\"btn btn-primary mr-1\" href=\"inactivate.php?id=" . $row['id'] . " \" role=\"button\">Inativar</a>";
+
+                    if($row['situacao'] == 'Ativo') {
+                        echo "<a class=\"btn btn-primary mr-1\" href=\"inactivate.php?id=" . $row['id'] . " \" role=\"button\">Inativar</a>";
+                    } else echo "<a class=\"btn btn-primary mr-1\" href=\"activate.php?id=" . $row['id'] . " \" role=\"button\">Ativar</a>";
                 echo "<a class=\"btn btn-primary mr-1\" href=\"edit.php?id=" . $row['id'] . " \" role=\"button\">Editar</a>";
                 echo "<a class=\"btn btn-primary mr-1\" href=\"delete.php?id=" . $row['id'] . " \" role=\"button\">Excluir</a>";
 

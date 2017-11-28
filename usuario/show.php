@@ -13,7 +13,10 @@ include_once '../functions.php';
     <link href="../css/stylesheetjr.css" rel="stylesheet">
 </head>
 <body>
-<?php include_once '../header.php'; ?>
+<?php include_once '../header.php';
+$table = 'usuario';
+$var = findUser('usuario', $_GET['id']);
+?>
 
 <div class="container mt-3">
     <div class="card">
@@ -40,17 +43,22 @@ include_once '../functions.php';
 
             <tbody>
 
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Maria</td>
-                    <td>Carolina</td>
-                    <td>20</td>
-                    <td>599068047</td>
-                    <td>65306598562</td>
-                    <td>Feminino</td>
-                    <td>165</td>
-                    <td>70</td>
-                </tr>
+            <?php
+            while($row = mysqli_fetch_assoc($var)) {
+                echo "<tr>";
+                echo "<th>" . $row['id'] . "</th>";
+                echo "<td>" . $row['nome'] . "</td>";
+                echo "<td>" . $row['sobrenome'] . "</td>";
+                echo "<td>" . $row['idade'] . "</td>";
+                echo "<td>" . $row['RG'] . "</td>";
+                echo "<td>" . $row['CPF'] . "</td>";
+                echo "<td>" . $row['sexo'] . "</td>";
+                echo "<td>" . $row['altura'] . "</td>";
+                echo "<td>" . $row['peso'] . "</td>";
+                echo "</tr>";
+            }
+            ?>
+
             </tbody>
         </table>
 

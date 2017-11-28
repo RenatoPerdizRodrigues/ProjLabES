@@ -254,19 +254,13 @@
 
 
         //Criando a query, com o nome das colunas e valores inseridos.
-        $query = "SELECT * FROM $table WHERE exercicioID = " . $id;
+        $query = "SELECT * FROM $table WHERE id = " . $id;
 
         //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
-        $data = array();
         $result = mysqli_query($connection, $query);
         if ($result) {
-            mysqli_data_seek ( $result, 0 );
-            while($row = mysqli_fetch_assoc($result)) {
-                echo "<pre>";
-                var_dump($row);
-                $data[] = $row;
-            } echo "não entrou";
-            return $data;
+            //$row = mysqli_fetch_assoc($result);
+            return $result;
         }
 
     }

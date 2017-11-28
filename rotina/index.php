@@ -46,12 +46,11 @@ $var = indexUser($table);
                 echo "<td>" . $row['nome'] . "</td>";
                 echo "<td>" . $row['sobrenome'] . "</td>";
                 echo "<td>" . $row['RG'] . "</td>";
-                echo "<td>";
+                echo "<td style='width:450px;'>";
                 echo "<a class=\"btn btn-primary mr-1\" href=\"create.php?id=" . $row['id'] . " \" role=\"button\">Cadastrar Rotina</a>";
                 echo "<a class=\"btn btn-primary mr-1\" href=\"show.php?id=" . $row['id'] . " \" role=\"button\">Mostrar Rotina</a>";
                 echo "<a class=\"btn btn-primary mr-1\" href=\"edit.php?id=" . $row['id'] . " \" role=\"button\">Editar</a>";
                 echo "<a class=\"btn btn-primary mr-1\" href=\"delete.php?id=" . $row['id'] . " \" role=\"button\">Excluir</a>";
-
                 echo "</td>";
                 echo "</tr>";
             }

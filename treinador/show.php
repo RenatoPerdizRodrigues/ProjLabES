@@ -13,7 +13,10 @@ include_once '../functions.php';
     <link href="../css/stylesheetjr.css" rel="stylesheet">
 </head>
 <body>
-<?php include_once '../header.php'; ?>
+<?php include_once '../header.php';
+$table = 'treinador';
+$var = findTrainer('treinador', $_GET['id']);
+?>
 
 <div class="container mt-3">
     <div class="card">
@@ -26,6 +29,7 @@ include_once '../functions.php';
             <tr>
                 <th>#</th>
                 <th>Nome</th>
+                <th>Sobrenome</th>
                 <th>RG</th>
                 <th>CPF</th>
                 <th>Carteira de Trabalho</th>
@@ -34,31 +38,23 @@ include_once '../functions.php';
                 <th>Status</th>
             </tr>
             </thead>
-
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Maria</td>
-                    <td>Carolina</td>
-                    <td>599068047</td>
-                    <td>65306598562</td>
-                    <td>Feminino</td>
-                    <td>165</td>
-                    <td>Ativo</td>
-                </tr>
 
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Maria</td>
-                    <td>Carolina</td>
-                    <td>599068047</td>
-                    <td>65306598562</td>
-                    <td>Feminino</td>
-                    <td>165</td>
-                    <td>Ativo</td>
-                </tr>
-            </tbody>
-        </table>
+            <?php
+            while($row = mysqli_fetch_assoc($var)) {
+                echo "<tr>";
+                echo "<th>" . $row['id'] . "</th>";
+                echo "<td>" . $row['nome'] . "</td>";
+                echo "<td>" . $row['sobrenome'] . "</td>";
+                echo "<td>" . $row['RG'] . "</td>";
+                echo "<td>" . $row['CPF'] . "</td>";
+                echo "<td>" . $row['carteiraTrab'] . "</td>";
+                echo "<td>" . $row['salario'] . "</td>";
+                echo "<td>" . $row['dataContratacao'] . "</td>";
+                echo "<td>" . $row['situacao'] . "</td>";
+                echo "</tr>";
+            }
+            ?>
 
 
 
