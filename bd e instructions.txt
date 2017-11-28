@@ -1,0 +1,81 @@
+create database xtreme_xcercise
+
+CREATE TABLE treinador(
+	id int auto_increment PRIMARY KEY,
+	nome varchar(35),
+	sobrenome varchar(35),
+	idade int,
+	RG varchar(9),
+	CPF varchar(11),
+	carteiraTrab varchar(5),
+	salario int,
+	dataContratacao date,
+	situacao varchar(7)
+);
+
+CREATE TABLE exercicio(
+	exercicioID int auto_increment PRIMARY KEY,
+	nome varchar(35),
+	descricao varchar(200)
+);
+
+CREATE TABLE usuario(
+	id int auto_increment PRIMARY KEY,
+	nome varchar(35),
+	sobrenome varchar(35),
+	idade int,
+	RG varchar(9),
+	CPF varchar(11),
+	sexo varchar(9),
+	altura float,
+	peso double
+)
+
+CREATE TABLE aparelho(
+	aparelhoID int auto_increment PRIMARY KEY,
+	marca varchar(35),
+	modelo varchar(35),
+	dataAquisicao date,
+	ultimaManutencao date
+)
+
+CREATE TABLE rotina(
+	rotinaID int auto_increment PRIMARY KEY,
+	ex1 int,
+	ap1 int,
+	rep1 int,
+	ex2 int,
+	ap2 int,
+	rep2 int,
+	ex3 int,
+	ap3 int,
+	rep3 int,
+	ex4 int,
+	ap4 int,
+	rep4 int,
+	ex5 int,
+	ap5 int,
+	rep5 int,
+	FOREIGN KEY (ex1) REFERENCES exercicio(exercicioID),
+	FOREIGN KEY (ex2) REFERENCES exercicio(exercicioID),
+	FOREIGN KEY (ex3) REFERENCES exercicio(exercicioID),
+	FOREIGN KEY (ex4) REFERENCES exercicio(exercicioID),
+	FOREIGN KEY (ex5) REFERENCES exercicio(exercicioID),
+	FOREIGN KEY (ap1) REFERENCES aparelho(aparelhoID),
+	FOREIGN KEY (ap2) REFERENCES aparelho(aparelhoID),
+	FOREIGN KEY (ap3) REFERENCES aparelho(aparelhoID),
+	FOREIGN KEY (ap4) REFERENCES aparelho(aparelhoID),
+	FOREIGN KEY (ap5) REFERENCES aparelho(aparelhoID)
+)
+
+
+CREATE TABLE 
+
+INSERT INTO treinador(nome, idade, RG, CPF, carteiraTrab, salario, dataContratacao, situação) VALUES ('231', '32134131' ,'314413' ,'31231' ,'413241' ,'12321' ,'1222-12-12' ,'Ativo')
+
+PROX//
+Edit de treinador está deixando a situação em branco pq não tem campo, mudar pra sempre ativo
+Criar o informações com todos os campos
+Clicar a função inativar que deixa o campo como inativo
+
+

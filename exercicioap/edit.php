@@ -13,7 +13,15 @@ include_once '../functions.php';
     <link href="../css/stylesheetjr.css" rel="stylesheet">
 </head>
 <body>
-<?php include_once '../header.php'; ?>
+<?php include_once '../header.php';
+$table = 'exercicio';
+$var = findExercise('exercicio', $_GET['id']);
+$row = mysqli_fetch_assoc($var);
+
+    if(isset($_POST["submit"])){
+        updateExercise('exercicio', $_POST);
+    }
+?>
 
 <div class="container mt-3">
     <div class="card">
@@ -22,14 +30,15 @@ include_once '../functions.php';
         </div>
 
         <div class="card-block">
-            <form>
+            <form action="edit.php?id=<?php echo $_GET['id'];?>" method="post">
+                    <input type="hidden" name="id" value="<?php echo $row['$id'];?>">
                 <div class="form-group">
                     <label>Nome</label>
-                    <input type="textfield" name="nome" class="form-control">
+                    <input type="textfield" name="nome" value="<?php echo $row['nome'];?>" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>Descrição</label>
-                    <input type="number" name="descricao" class="form-control">
+                    <input type="textfield" name="descricao" value="<?php echo $row['descricao'];?>" class="form-control">
                 </div>
 
                 <button type="submit" name="submit" class="btn btn-primary">Submit</button>

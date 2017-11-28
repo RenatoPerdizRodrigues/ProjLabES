@@ -3,7 +3,7 @@ include_once '../functions.php';
 
 $id = $_GET['id'];
 
-deleteExercise('exercicio', $id);
+deleteMachine('aparelho', $id);
 
 header("Location: index.php");
 

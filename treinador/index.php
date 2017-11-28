@@ -13,7 +13,10 @@ include_once '../functions.php';
     <link href="../css/stylesheetjr.css" rel="stylesheet">
 </head>
 <body>
-<?php include_once '../header.php'; ?>
+<?php include_once '../header.php';
+$table = 'treinador';
+$var = indexTrainer($table);
+?>
 
 
 
@@ -38,51 +41,26 @@ include_once '../functions.php';
             </thead>
             <tbody>
 
-            <th scope="row">1</th>
-            <td>Maria</td>
-            <td>Carolina</td>
-            <td>599068047</td>
-            <td>1234</td>
-            <td>Ativo</td>
+            <?php
+            while($row = mysqli_fetch_assoc($var)) {
+                echo "<tr>";
+                echo "<th>" . $row['id'] . "</th>";
+                echo "<td>" . $row['nome'] . "</td>";
+                echo "<td>" . $row['sobrenome'] . "</td>";
+                echo "<td>" . $row['RG'] . "</td>";
+                echo "<td>" . $row['carteiraTrab'] . "</td>";
+                echo "<td>" . $row['situacao'] . "</td>";
+                echo "<td>";
+                echo "<a class=\"btn btn-primary mr-1\" href=\"show.php?id=" . $row['id'] . " \" role=\"button\">Informações</a>";
+                echo "<a class=\"btn btn-primary mr-1\" href=\"inactivate.php?id=" . $row['id'] . " \" role=\"button\">Inativar</a>";
+                echo "<a class=\"btn btn-primary mr-1\" href=\"edit.php?id=" . $row['id'] . " \" role=\"button\">Editar</a>";
+                echo "<a class=\"btn btn-primary mr-1\" href=\"delete.php?id=" . $row['id'] . " \" role=\"button\">Excluir</a>";
 
-            <td>
-                <a class="btn btn-primary" href="show.php" role="button">Informações</a>
-                <a class="btn btn-primary" href="inactivate.php" role="button">Inativar</a>
-                <a class="btn btn-primary" href="edit.php" role="button">Editar</a>
-                <a class="btn btn-primary" href="delete.php" role="button">Excluir</a>
-            </td>
-            <div>
-                </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Maria</td>
-                    <td>Carolina</td>
-                    <td>599068047</td>
-                    <td>1234</td>
-                    <td>Ativo</td>
+                echo "</td>";
+                echo "</tr>";
+            }
+            ?>
 
-                    <td>
-                        <a class="btn btn-primary" href="show.php" role="button">Informações</a>
-                        <a class="btn btn-primary" href="inactivate.php" role="button">Inativar</a>
-                        <a class="btn btn-primary" href="edit.php" role="button">Editar</a>
-                        <a class="btn btn-primary" href="delete.php" role="button">Excluir</a>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Maria</td>
-                    <td>Carolina</td>
-                    <td>599068047</td>
-                    <td>1234</td>
-                    <td>Ativo</td>
-
-                    <td>
-                        <a class="btn btn-primary" href="show.php" role="button">Informações</a>
-                        <a class="btn btn-primary" href="inactivate.php" role="button">Inativar</a>
-                        <a class="btn btn-primary" href="edit.php" role="button">Editar</a>
-                        <a class="btn btn-primary" href="delete.php" role="button">Excluir</a>
-                    </td>
-                </tr>
             </tbody>
         </table>
 

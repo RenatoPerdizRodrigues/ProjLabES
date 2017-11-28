@@ -13,7 +13,15 @@ include_once '../functions.php';
     <link href="../css/stylesheetjr.css" rel="stylesheet">
 </head>
 <body>
-<?php include_once '../header.php'; ?>
+<?php include_once '../header.php';
+    $table = 'usuario';
+    $var = findUser('usuario', $_GET['id']);
+    $row = mysqli_fetch_assoc($var);
+
+    if(isset($_POST["submit"])){
+        updateUser('usuario', $_POST);
+    }
+?>
 
 <div class="container mt-3">
     <div class="card">
@@ -22,50 +30,34 @@ include_once '../functions.php';
         </div>
 
         <div class="card-block">
-            <form>
+            <form  action="edit.php?id=<?php echo $_GET['id'];?>" method="post">
                 <div class="form-group">
                     <label>Nome</label>
-                    <input type="textfield" name="username" class="form-control">
+                    <input type="textfield" name="nome" class="form-control" value="<?php echo $row['nome'];?>">
+                </div>
+                <div class="form-group">
+                    <label>Sobrenome</label>
+                    <input type="textfield" name="sobrenome" class="form-control" value="<?php echo $row['sobrenome'];?>">
                 </div>
                 <div class="form-group">
                     <label>Idade</label>
-                    <input type="number" name="userage" class="form-control">
+                    <input type="number" name="idade" class="form-control" value="<?php echo $row['idade'];?>">
                 </div>
                 <div class="form-group">
                     <label>RG</label>
-                    <input type="number" name="RG" class="form-control">
+                    <input type="number" name="RG" class="form-control" value="<?php echo $row['RG'];?>">
                 </div>
                 <div class="form-group">
                     <label>CPF</label>
-                    <input type="number" name="CPF" class="form-control">
-                </div>
-                <label>Sexo</label>
-                <br>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="gender" id="exampleRadios1" value="Masculino">
-                        Masculino
-                    </label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="gender" id="exampleRadios1" value="Feminino">
-                        Feminino
-                    </label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="gender" id="exampleRadios1" value="Outro">
-                        Outro
-                    </label>
+                    <input type="number" name="CPF" class="form-control" value="<?php echo $row['CPF'];?>">
                 </div>
                 <div class="form-group">
                     <label>Altura</label>
-                    <input type="number" name="userheight" class="form-control">
+                    <input type="number" name="altura" class="form-control" value="<?php echo $row['altura'];?>">
                 </div>
                 <div class="form-group">
                     <label>Peso</label>
-                    <input type="number" name="userweight" class="form-control">
+                    <input type="number" name="peso" class="form-control" value="<?php echo $row['peso'];?>">
                 </div>
 
                 <button type="submit" name="submit" class="btn btn-primary">Submit</button>

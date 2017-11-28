@@ -13,7 +13,10 @@ include_once '../functions.php';
     <link href="../css/stylesheetjr.css" rel="stylesheet">
 </head>
 <body>
-<?php include_once '../header.php'; ?>
+<?php include_once '../header.php';
+$table = 'aparelho';
+$var = indexMachine($table);
+?>
 
 
 
@@ -36,30 +39,24 @@ include_once '../functions.php';
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Esteira</td>
-                <td>Nakagym</td>
-                <td>16/11/2011</td>
-                <td>01/01/2017</td>
-                <td>
-                    <a class="btn btn-primary" href="edit.php" role="button">Editar</a>
-                    <a class="btn btn-primary" href="delete.php" role="button">Excluir</a>
-                </td>
-                <div>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Supino Vertical</td>
-                <td>Nakagym</td>
-                <td>16/11/2011</td>
-                <td>01/01/2017</td>
-                <td>
-                    <a class="btn btn-primary" href="edit.php" role="button">Editar</a>
-                    <a class="btn btn-primary" href="delete.php" role="button">Excluir</a>
-                </td>
-                <div>
-            </tr>
+
+            <?php
+            while($row = mysqli_fetch_assoc($var)) {
+                echo "<tr>";
+                echo "<th>" . $row['aparelhoID'] . "</th>";
+                echo "<td>" . $row['modelo'] . "</td>";
+                echo "<td>" . $row['marca'] . "</td>";
+                echo "<td>" . $row['dataAquisicao'] . "</td>";
+                echo "<td>" . $row['ultimaManutencao'] . "</td>";
+                echo "<td>";
+                echo "<a class=\"btn btn-primary mr-1\" href=\"edit.php?id=" . $row['aparelhoID'] . " \" role=\"button\">Editar</a>";
+                echo "<a class=\"btn btn-primary mr-1\" href=\"delete.php?id=" . $row['aparelhoID'] . " \" role=\"button\">Excluir</a>";
+
+                echo "</td>";
+                echo "</tr>";
+            }
+            ?>
+            </tbody>
         </table>
 
 

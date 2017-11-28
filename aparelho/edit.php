@@ -13,7 +13,15 @@ include_once '../functions.php';
     <link href="../css/stylesheetjr.css" rel="stylesheet">
 </head>
 <body>
-<?php include_once '../header.php'; ?>
+<?php include_once '../header.php';
+$table = 'aparelho';
+$var = findMachine('aparelho', $_GET['id']);
+$row = mysqli_fetch_assoc($var);
+
+if(isset($_POST["submit"])){
+    updateMachine('aparelho', $_POST);
+}
+?>
 
 <div class="container mt-3">
     <div class="card">
@@ -22,22 +30,22 @@ include_once '../functions.php';
         </div>
 
         <div class="card-block">
-            <form>
+            <form  action="edit.php?id=<?php echo $_GET['id'];?>" method="post">
                 <div class="form-group">
                     <label>Modelo</label>
-                    <input type="textfield" name="modelo" class="form-control">
+                    <input type="textfield" name="modelo" class="form-control" value="<?php echo $row['modelo'];?>">
                 </div>
                 <div class="form-group">
                     <label>Marca</label>
-                    <input type="number" name="marca" class="form-control">
+                    <input type="texfield" name="marca" class="form-control" value="<?php echo $row['marca'];?>">
                 </div>
                 <div class="form-group">
                     <label>Data de Aquisição</label>
-                    <input type="date" name="dataaq" class="form-control">
+                    <input type="date" name="dataaq" class="form-control" value="<?php echo $row['dataAquisicao'];?>">
                 </div>
                 <div class="form-group">
                     <label>Última Manutenção</label>
-                    <input type="date" name="datamanutencao" class="form-control">
+                    <input type="date" name="datamanutencao" class="form-control" value="<?php echo $row['ultimaManutencao'];?>">
                 </div>
 
                 <button type="submit" name="submit" class="btn btn-primary">Submit</button>

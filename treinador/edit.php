@@ -13,7 +13,16 @@ include_once '../functions.php';
     <link href="../css/stylesheetjr.css" rel="stylesheet">
 </head>
 <body>
-<?php include_once '../header.php'; ?>
+<?php include_once '../header.php';
+    $table = 'treinador';
+    $var = findTrainer('treinador', $_GET['id']);
+    $row = mysqli_fetch_assoc($var);
+
+    if(isset($_POST["submit"])){
+        updateTrainer('treinador', $_POST);
+    }
+
+?>
 
 <div class="container mt-3">
     <div class="card">
@@ -22,34 +31,39 @@ include_once '../functions.php';
         </div>
 
         <div class="card-block">
-            <form>
+            <form action="edit.php?id=<?php echo $_GET['id'];?>" method="post">
+                <input type="hidden" name="id" value="<?php echo $row['$id'];?>">
                 <div class="form-group">
                     <label>Nome</label>
-                    <input type="textfield" name="username" class="form-control">
+                    <input type="textfield" name="username" class="form-control" value="<?php echo $row['nome'];?>">
+                </div>
+                <div class="form-group">
+                    <label>Sobrenome</label>
+                    <input type="textfield" name="userage" class="form-control" value="<?php echo $row['sobrenome'];?>">
                 </div>
                 <div class="form-group">
                     <label>Idade</label>
-                    <input type="number" name="userage" class="form-control">
+                    <input type="number" name="idade" class="form-control" value="<?php echo $row['idade'];?>">
                 </div>
                 <div class="form-group">
                     <label>RG</label>
-                    <input type="number" name="RG" class="form-control">
+                    <input type="number" name="RG" class="form-control" value="<?php echo $row['RG'];?>">
                 </div>
                 <div class="form-group">
                     <label>CPF</label>
-                    <input type="number" name="CPF" class="form-control">
+                    <input type="number" name="CPF" class="form-control" value="<?php echo $row['CPF'];?>">
                 </div>
                 <div class="form-group">
                     <label>Carteira de Trabalho</label>
-                    <input type="number" name="carteira" class="form-control">
+                    <input type="number" name="carteira" class="form-control" value="<?php echo $row['carteiraTrab'];?>">
                 </div>
                 <div class="form-group">
                     <label>Salário</label>
-                    <input type="number" name="salario" class="form-control">
+                    <input type="number" name="salario" class="form-control" value="<?php echo $row['salario'];?>">
                 </div>
                 <div class="form-group">
                     <label>Data de Contratação</label>
-                    <input type="date" name="CPF" class="form-control">
+                    <input type="date" name="datacontratacao" class="form-control" value="<?php echo $row['dataContratacao'];?>">
                 </div>
 
 

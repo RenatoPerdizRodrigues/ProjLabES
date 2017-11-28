@@ -17,7 +17,7 @@
 
     <div class="welcome">
         <h1>Olá, administrador!</h1>
-        <h4>Hoje é dia XX/YY/ZZZZ</h4>
+        <?php echo "<h4>Hoje é dia " . date("d/m/y</h4>");?>
     </div>
 
 

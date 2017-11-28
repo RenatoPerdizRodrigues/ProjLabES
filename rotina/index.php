@@ -13,7 +13,10 @@ include_once '../functions.php';
     <link href="../css/stylesheetjr.css" rel="stylesheet">
 </head>
 <body>
-<?php include_once '../header.php'; ?>
+<?php include_once '../header.php';
+$table = 'usuario';
+$var = indexUser($table);
+?>
 
 
 
@@ -21,7 +24,7 @@ include_once '../functions.php';
 <div class="container mt-3">
     <div class="card">
         <div class="card-header">
-            <h1 class="h5 m-0">Lista de Rotinas</h1>
+            <h1 class="h5 m-0">Lista de Usuários para Rotinas</h1>
         </div>
 
         <table class="table table-responsive">
@@ -29,41 +32,31 @@ include_once '../functions.php';
             <tr>
                 <th>#</th>
                 <th>Nome</th>
+                <th>Sobrenome</th>
                 <th>RG</th>
                 <th style="width: 300px;">Ações</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Maria</td>
-                <td>599068047</td>
-                <td>
-                    <a class="btn btn-primary" href="show.php" role="button">Mostrar Rotina</a>
-                    <a class="btn btn-primary" href="edit.php" role="button">Editar</a>
-                    <a class="btn btn-primary" href="delete.php" role="button">Excluir</a>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Roberto</td>
-                <td>36506807</td>
-                <td>
-                    <a class="btn btn-primary" href="show.php" role="button">Mostrar Rotina</a>
-                    <a class="btn btn-primary" href="edit.php" role="button">Editar</a>
-                    <a class="btn btn-primary" href="delete.php" role="button">Excluir</a>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Victor</td>
-                <td>58951624</td>
-                <td>
-                    <a class="btn btn-primary" href="show.php" role="button">Mostrar Rotina</a>
-                    <a class="btn btn-primary" href="edit.php" role="button">Editar</a>
-                    <a class="btn btn-primary" href="delete.php" role="button">Excluir</a>
-                </td>
-            </tr>
+
+            <?php
+            while($row = mysqli_fetch_assoc($var)) {
+                echo "<tr>";
+                echo "<th>" . $row['id'] . "</th>";
+                echo "<td>" . $row['nome'] . "</td>";
+                echo "<td>" . $row['sobrenome'] . "</td>";
+                echo "<td>" . $row['RG'] . "</td>";
+                echo "<td>";
+                echo "<a class=\"btn btn-primary mr-1\" href=\"create.php?id=" . $row['id'] . " \" role=\"button\">Cadastrar Rotina</a>";
+                echo "<a class=\"btn btn-primary mr-1\" href=\"show.php?id=" . $row['id'] . " \" role=\"button\">Mostrar Rotina</a>";
+                echo "<a class=\"btn btn-primary mr-1\" href=\"edit.php?id=" . $row['id'] . " \" role=\"button\">Editar</a>";
+                echo "<a class=\"btn btn-primary mr-1\" href=\"delete.php?id=" . $row['id'] . " \" role=\"button\">Excluir</a>";
+
+                echo "</td>";
+                echo "</tr>";
+            }
+            ?>
+
             </tbody>
         </table>
 

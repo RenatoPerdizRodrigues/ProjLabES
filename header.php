@@ -9,14 +9,14 @@
                 <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Treinador</a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="<?php generateRoute('treinador/create.php'); ?>">Cadastrar</a>
-                    <a class="dropdown-item" href="<?php generateRoute('treinador/index.php'); ?>">Index</a>
+                    <a class="dropdown-item" href="<?php generateRoute('treinador/index.php'); ?>">Consultar</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Usuário</a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="<?php generateRoute('usuario/create.php'); ?>">Cadastrar</a>
-                    <a class="dropdown-item" href="<?php generateRoute('usuario/index.php'); ?>">Index</a>
+                    <a class="dropdown-item" href="<?php generateRoute('usuario/index.php'); ?>">Consultar</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -36,8 +36,7 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Rotina</a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="<?php generateRoute('rotina/create.php'); ?>">Cadastrar</a>
-                    <a class="dropdown-item" href="<?php generateRoute('rotina/index.php'); ?>">Consultar</a>
+                    <a class="dropdown-item" href="<?php generateRoute('rotina/index.php'); ?>">Cadastrar e Consultar</a>
                 </div>
             </li>
         </ul>

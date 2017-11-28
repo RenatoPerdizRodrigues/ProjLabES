@@ -22,14 +22,14 @@ include_once '../functions.php';
         </div>
 
         <div class="card-block">
-            <form>
+            <form  action="create.php" method="post">
                 <div class="form-group">
                     <label>Modelo</label>
                     <input type="textfield" name="modelo" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>Marca</label>
-                    <input type="number" name="marca" class="form-control">
+                    <input type="textfield" name="marca" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>Data de Aquisição</label>
@@ -45,6 +45,10 @@ include_once '../functions.php';
         </div>
     </div>
 </div>
+
+<?php
+$table = 'aparelho';
+createMachine($table)?>
 
 <script src="../js/libs/jquery.min.js"></script>
 <script src="../js/libs/tether.min.js"></script>

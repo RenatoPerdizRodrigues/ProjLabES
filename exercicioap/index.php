@@ -13,9 +13,12 @@ include_once '../functions.php';
     <link href="../css/stylesheetjr.css" rel="stylesheet">
 </head>
 <body>
-<?php include_once '../header.php'; ?>
+<?php include_once '../header.php';
 
+    $table = 'exercicio';
+    $var = indexExercise($table);
 
+?>
 
 
 <div class="container mt-3">
@@ -34,27 +37,21 @@ include_once '../functions.php';
             </tr>
             </thead>
             <tbody>
-            <tr>
-            <th scope="row">1</th>
-            <td>Abdominal</td>
-            <td>Fazer deitado, flexionando o abdômen, levantando as costas.</td>
-            <td>
-                <a class="btn btn-primary" href="edit.php" role="button">Editar</a>
-                <a class="btn btn-primary" href="delete.php" role="button">Excluir</a>
-            </td>
-            <div>
-            </tr>
-            <tbody>
-            <tr>
-                <th scope="row">2</th>
-                <td>Flexão</td>
-                <td>Fazer com a barriga virada para baixo, levantando o corpo com as duas mãos.</td>
-                <td>
-                    <a class="btn btn-primary" href="edit.php" role="button">Editar</a>
-                    <a class="btn btn-primary" href="delete.php" role="button">Excluir</a>
-                </td>
-                <div>
-            </tr>
+            <?php
+            while($row = mysqli_fetch_assoc($var)) {
+                echo "<tr>";
+                echo "<th>" . $row['exercicioID'] . "</th>";
+                echo "<td>" . $row['nome'] . "</td>";
+                echo "<td>" . $row['descricao'] . "</td>";
+                echo "<td>";
+                echo "<a class=\"btn btn-primary mr-2\" href=\"edit.php?id=" . $row['exercicioID'] . " \" role=\"button\">Editar</a>";
+                echo "<a class=\"btn btn-primary mr-2\" href=\"delete.php?id=" . $row ['exercicioID'] . " \" role=\"button\">Excluir</a>";
+                echo "</td>";
+                echo "</tr>";
+            }
+            ?>
+
+
             </tbody>
         </table>
 
@@ -62,10 +59,6 @@ include_once '../functions.php';
     </div>
 </div>
 </div>
-
-    <?php
-    $table = 'exercicio';
-    indexExercise($table)?>
 
 <script src="../js/libs/jquery.min.js"></script>
 <script src="../js/libs/tether.min.js"></script>

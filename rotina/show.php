@@ -13,37 +13,43 @@ include_once '../functions.php';
     <link href="../css/stylesheetjr.css" rel="stylesheet">
 </head>
 <body>
-<?php include_once '../header.php'; ?>
+<?php include_once '../header.php';
+$var = findRoutine('rotina', $_GET['id']);
+?>
 
 <div class="container mt-3">
     <div class="card">
         <div class="card-header">
-            <h1 class="h5 m-0">Informações de Treinador</h1>
+            <h1 class="h5 m-0">Rotina do Usuário</h1>
         </div>
+
+
 
         <table class="table table-responsive">
             <thead>
             <tr>
                 <th>#</th>
-                <th>Nome</th>
                 <th>Exercício</th>
+                <th>Aparelho</th>
                 <th>Repetições</th>
             </tr>
             </thead>
 
             <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Cláudio</td>
-                <td>Abdominal</td>
-                <td>20</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Cláudio</td>
-                <td>Abdominal</td>
-                <td>20</td>
-            </tr>
+
+            <?php
+                $var1 = 1;
+                foreach($var as $rotina){
+                    $var1 = $rotina['ex1'];
+            }
+                $nex = findExercise('rotina', $var1);
+                echo "<pre>";
+                var_dump($nex);
+
+
+
+            ?>
+
             </tbody>
         </table>
 

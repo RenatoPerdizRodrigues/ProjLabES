@@ -21,6 +21,8 @@ include_once '../functions.php';
             <h1 class="h5 m-0">Informações de Usuário</h1>
         </div>
 
+
+
         <table class="table table-responsive">
             <thead>
             <tr>
