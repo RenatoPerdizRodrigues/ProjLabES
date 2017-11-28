@@ -252,23 +252,38 @@
         //Comando que faz a conexão: Local, username, senha (vazia), e nome do BD
         $connection = mysqli_connect("localhost", "root", "", "xtreme_xcercise");
 
+        //Criando a query, com o nome das colunas e valores inseridos.
+        $query = "SELECT * FROM $table WHERE exercicioID = " . $id;
+
+        $data = array();
+        $result = mysqli_query($connection, $query);
+
+        if ($result) {
+            while($row = mysqli_fetch_assoc($result)) {
+                $data[] = $row;
+            }
+
+            return $data;
+        }
+    }
+
+    function findExerciseArray($table, $id){
+        //Comando que faz a conexão: Local, username, senha (vazia), e nome do BD
+        $connection = mysqli_connect("localhost", "root", "", "xtreme_xcercise");
 
         //Criando a query, com o nome das colunas e valores inseridos.
         $query = "SELECT * FROM $table WHERE exercicioID = " . $id;
 
-        //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
         $data = array();
         $result = mysqli_query($connection, $query);
+
         if ($result) {
-            mysqli_data_seek ( $result, 0 );
             while($row = mysqli_fetch_assoc($result)) {
-                echo "<pre>";
-                var_dump($row);
                 $data[] = $row;
-            } echo "não entrou";
+            }
+
             return $data;
         }
-
     }
 
     function updateExercise($table, $dados){
@@ -362,6 +377,25 @@
         if ($result) {
             //$row = mysqli_fetch_assoc($result);
             return $result;
+        }
+    }
+
+    function findMachineArray($table, $id){
+        //Comando que faz a conexão: Local, username, senha (vazia), e nome do BD
+        $connection = mysqli_connect("localhost", "root", "", "xtreme_xcercise");
+
+        //Criando a query, com o nome das colunas e valores inseridos.
+        $query = "SELECT * FROM $table WHERE aparelhoID = " . $id;
+
+        $data = array();
+        $result = mysqli_query($connection, $query);
+
+        if ($result) {
+            while($row = mysqli_fetch_assoc($result)) {
+                $data[] = $row;
+            }
+
+            return $data;
         }
     }
 
@@ -513,6 +547,8 @@
             while($row = mysqli_fetch_assoc($result)) {
                 $data[] = $row;
             }
+
+            $connection->close();
             return $data;
         }
 
