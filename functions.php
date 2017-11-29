@@ -13,6 +13,17 @@ function redirectTo($page) {
     exit();
 }
 
+//Erros
+function checkForErrors() {
+    if(isset($_SESSION['error']) && $_SESSION['error'] !== '') {
+        echo '<div class="alert alert-danger" role="alert">';
+        echo $_SESSION['error'];
+        echo '</div>';
+
+        unset($_SESSION['error']);
+    }
+}
+
 //Conexão
 function connection() {
     return mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
