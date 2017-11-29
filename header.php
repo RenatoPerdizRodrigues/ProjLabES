@@ -5,6 +5,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav mr-auto">
+            <?php
+                if(getPermission() === '3'):
+            ?>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Treinador</a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -33,12 +36,18 @@
                     <a class="dropdown-item" href="<?php generateRoute('aparelho/index.php'); ?>">Consultar</a>
                 </div>
             </li>
+            <?php
+                elseif(getPermission() === '1'):
+            ?>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Rotina</a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="<?php generateRoute('rotina/index.php'); ?>">Cadastrar e Consultar</a>
                 </div>
             </li>
+            <?php
+                endif;
+            ?>
         </ul>
         <ul class="navbar-nav">
             <li class="nav-item">

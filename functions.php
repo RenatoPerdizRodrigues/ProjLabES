@@ -69,6 +69,7 @@ function login($rg, $senha) {
         while($row = mysqli_fetch_assoc($result)) {
             $usuario['senha'] = $row['senha'];
             $usuario['nome'] = $row['nome'];
+            $usuario['permissao'] = $row['permissao'];
         }
 
         //Verifica se a senha digitada é igual a senha criptografada do banco com a função do PHP
@@ -76,9 +77,10 @@ function login($rg, $senha) {
             //Inicia sessão pra logar usuário
             unset($_SESSION['error']);
             $_SESSION['usuario'] = array(
-              'rg' => $rg,
-              'logado' => base64_encode(md5('sim')),
-               'nome' => $usuario['nome']
+                'rg' => $rg,
+                'logado' => base64_encode('sim'),
+                'nome' => $usuario['nome'],
+                'permissao' => base64_encode($usuario['permissao'])
             );
 
             redirectTo('index.php');
@@ -106,9 +108,14 @@ function login($rg, $senha) {
 
 //Valida SESSION do usuário
 function auth() {
-    if(!isset($_SESSION['usuario']['logado']) && $_SESSION['usuario']['logado'] !== base64_encode(md5('sim'))) {
+    //Se não estiver logado, manda pro login
+    if(!isset($_SESSION['usuario']['logado']) && $_SESSION['usuario']['logado'] !== base64_encode('sim')) {
         return sendToLogin();
     }
+
+    //Verifica permissoes
+    //Treinador ve somente rotina
+    //Admin ve tudo menos rotina
 }
 
 //Desloga usuário
@@ -696,31 +703,23 @@ function updateRoutine($table, $dados){
     header("Location: index.php");
 }
 
-function deleteRoutine($table, $id){
+    function deleteRoutine($table, $id){
+        //Criando a query, com o nome das colunas e valores inseridos.
+        $query = "DELETE FROM $table WHERE rotinaID=$id";
 
-    //Criando a query, com o nome das colunas e valores inseridos.
-    $query = "DELETE FROM $table WHERE rotinaID=$id";
 
+        //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
+        $result = mysqli_query(connection(), $query);
+        if ($result) {
+            setRoutine($id, 0);
+        } else {
+            $_SESSION['error'] = "Não foi possível deletar rotina.";
+        }
 
-    //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
-    $result = mysqli_query(connection(), $query);
-    if ($result) {
-        setRoutine($id, 0);
-    } else {
-        $_SESSION['error'] = "Não foi possível deletar rotina.";
+        redirectTo('rotina/index.php');
     }
-
-    redirectTo('rotina/index.php');
-}
 
     function getPermission(){
-        $session = $_SESSION['usuario']['nome'];
-        $query = "SELECT permissao FROM treinador WHERE nome='$session'";
-        var_dump($query);
-        $result = mysqli_query(connection(), $query);
-        if ($result){
-            return (int)$result;
-        } else echo "Falhou";
+        return base64_decode($_SESSION['usuario']['permissao']);
     }
-
 ?>
