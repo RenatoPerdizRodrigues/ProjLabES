@@ -23,8 +23,11 @@
 
 
 <div class="container mt-3">
-    <?php checkForErrors(); ?>
-    
+    <?php
+        checkForErrors();
+        checkForSuccess();
+    ?>
+
     <div class="card">
         <div class="card-header">
             <h1 class="h5 m-0">Lista de Exercícios</h1>
