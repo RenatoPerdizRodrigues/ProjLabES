@@ -1,4 +1,5 @@
 <?php
+session_start();
 ob_start();
 include_once 'config.php';
 
@@ -57,6 +58,7 @@ function login($rg, $senha) {
         //Somente pega senha se existir uma linha em $result
         while($row = mysqli_fetch_assoc($result)) {
             $usuario['senha'] = $row['senha'];
+            $usuario['nome'] = $row['nome'];
         }
 
         //Verifica se a senha digitada é igual a senha criptografada do banco com a função do PHP
@@ -65,7 +67,8 @@ function login($rg, $senha) {
             unset($_SESSION['error']);
             $_SESSION['usuario'] = array(
               'rg' => $rg,
-              'logado' => base64_encode(md5('sim'))
+              'logado' => base64_encode(md5('sim')),
+               'nome' => $usuario['nome']
             );
 
             redirectTo('index.php');
@@ -512,18 +515,23 @@ function updateMachine($table, $dados){
 }
 
 function deleteMachine($table, $id){
+    $rotina = "SELECT rotinaID FROM rotina WHERE ap1 = $id OR ap2 = $id OR ap3 = $id OR ap4 = $id OR ap5 = $id";
+    $rotinatrue = mysqli_query(connection(), $rotina);
 
+    if ($rotinatrue->num_rows >= 1) {
+        $_SESSION['error'] = 'Não foi possível excluir.';
+    }else {
+        //Criando a query, com o nome das colunas e valores inseridos.
+        $query = "DELETE FROM $table WHERE aparelhoID=$id";
 
+        //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
+        $result = mysqli_query(connection(), $query);
+        if (!$result) {
+            $_SESSION['error'] = 'Não foi possível excluir.';
+        }
+    }
 
-    //Criando a query, com o nome das colunas e valores inseridos.
-    $query = "DELETE FROM $table WHERE aparelhoID=$id";
-
-
-    //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
-    $result = mysqli_query(connection(), $query);
-    if ($result) {
-        echo "Delete deu certo";
-    } else echo "Delete deu errado seu BURRO";
+    redirectTo('aparelho/index.php');
 }
 
 
@@ -600,14 +608,14 @@ function createRoutine($table){
         var_dump($result);
         if ($result) {
             echo "Inserção deu certo!";
-            setRoutine($id);
+            setRoutine($id, 1);
         } else echo "Inserção deu errado!";
     }
 
 }
 
-function setRoutine($id){
-            $query = "UPDATE usuario SET temrotina='1' WHERE ID=$id";
+function setRoutine($id, $temrotina){
+            $query = "UPDATE usuario SET temrotina=$temrotina WHERE ID=$id";
             mysqli_query(connection(), $query);
             redirectTo('rotina/index.php');
 }
@@ -677,17 +685,19 @@ function updateRoutine($table, $dados){
 
 function deleteRoutine($table, $id){
 
-
-
     //Criando a query, com o nome das colunas e valores inseridos.
-    $query = "DELETE FROM $table WHERE aparelhoID=$id";
+    $query = "DELETE FROM $table WHERE rotinaID=$id";
 
 
     //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
     $result = mysqli_query(connection(), $query);
     if ($result) {
-        echo "Delete deu certo";
-    } else echo "Delete deu errado seu BURRO";
+        setRoutine($id, 0);
+    } else {
+        $_SESSION['error'] = "Não foi possível deletar rotina.";
+    }
+
+    redirectTo('rotina/index.php');
 }
 
 ?>

@@ -22,6 +22,7 @@ $var = indexUser($table);
 
 
 <div class="container mt-3">
+    <?php checkForErrors(); ?>
     <div class="card">
         <div class="card-header">
             <h1 class="h5 m-0">Lista de Usuários para Rotinas</h1>
@@ -47,10 +48,13 @@ $var = indexUser($table);
                 echo "<td>" . $row['sobrenome'] . "</td>";
                 echo "<td>" . $row['RG'] . "</td>";
                 echo "<td style='width:450px;'>";
-                echo "<a class=\"btn btn-primary mr-1\" href=\"create.php?id=" . $row['id'] . " \" role=\"button\">Cadastrar Rotina</a>";
-                echo "<a class=\"btn btn-primary mr-1\" href=\"show.php?id=" . $row['id'] . " \" role=\"button\">Mostrar Rotina</a>";
-                echo "<a class=\"btn btn-primary mr-1\" href=\"edit.php?id=" . $row['id'] . " \" role=\"button\">Editar</a>";
-                echo "<a class=\"btn btn-primary mr-1\" href=\"delete.php?id=" . $row['id'] . " \" role=\"button\">Excluir</a>";
+                    if ($row['temrotina']) {
+                        echo "<a class=\"btn btn-primary mr-1\" href=\"show.php?id=" . $row['id'] . " \" role=\"button\">Mostrar Rotina</a>";
+                        echo "<a class=\"btn btn-primary mr-1\" href=\"edit.php?id=" . $row['id'] . " \" role=\"button\">Editar Rotina</a>";
+                        echo "<a class=\"btn btn-primary mr-1\" href=\"delete.php?id=" . $row['id'] . " \" role=\"button\">Excluir Rotina</a>";
+                    } else {
+                        echo "<a class=\"btn btn-primary mr-1\" href=\"create.php?id=" . $row['id'] . " \" role=\"button\">Cadastrar Rotina</a>";
+                    }
                 echo "</td>";
                 echo "</tr>";
             }

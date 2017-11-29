@@ -22,9 +22,10 @@ $var = indexMachine($table);
 
 
 <div class="container mt-3">
+    <?php checkForErrors(); ?>
     <div class="card">
         <div class="card-header">
-            <h1 class="h5 m-0">Lista de Exercícios</h1>
+            <h1 class="h5 m-0">Lista de Aparelhos</h1>
         </div>
 
         <table class="table table-responsive">

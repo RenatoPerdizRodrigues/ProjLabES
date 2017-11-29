@@ -16,7 +16,7 @@
     <?php include_once 'header.php'; ?>
 
     <div class="welcome">
-        <h1>Olá, administrador!</h1>
+        <h1>Olá, <?php echo $_SESSION['usuario']['nome'] ?></h1>
         <h4>Você está logado</h4>
     </div>
 

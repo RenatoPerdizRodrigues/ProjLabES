@@ -1,6 +1,4 @@
 <?php
-    // Tem que iniciar a session em todas as páginas que vão ser RESTRITAS
-    session_start();
     include_once '../functions.php';
 
     // Faz a autenticacao
