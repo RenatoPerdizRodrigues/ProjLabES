@@ -14,7 +14,7 @@ function redirectTo($page) {
     exit();
 }
 
-//Erros
+//Messages
 function checkForErrors() {
     if(isset($_SESSION['error']) && $_SESSION['error'] !== '') {
         echo '<div class="alert alert-danger" role="alert">';
@@ -22,6 +22,16 @@ function checkForErrors() {
         echo '</div>';
 
         unset($_SESSION['error']);
+    }
+}
+
+function checkForSuccess() {
+    if(isset($_SESSION['success']) && $_SESSION['success'] !== '') {
+        echo '<div class="alert alert-success" role="alert">';
+        echo $_SESSION['success'];
+        echo '</div>';
+
+        unset($_SESSION['success']);
     }
 }
 
@@ -408,6 +418,8 @@ function deleteExercise($table, $id){
         $query = "DELETE FROM $table WHERE exercicioID=$id";
 
         //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
+
+        $_SESSION['success'] = 'Excluiu.';
         $result = mysqli_query(connection(), $query);
         if (!$result) {
             $_SESSION['error'] = 'Não foi possível excluir.';
