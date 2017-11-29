@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include_once 'config.php';
 
 //Gera URLS absolutas
@@ -157,11 +158,10 @@ function updateTrainer($table, $dados){
     $cart = $dados['carteira'];
     $sal = $dados['salario'];
     $datac = $dados['datacontratacao'];
-    $situacao = $dados['ativo'];
 
 
     //Criando a query, com o nome das colunas e valores inseridos.
-    $query = "UPDATE $table SET nome='$nome',sobrenome='$sobrenome',idade='$idade',rg='$rg',cpf='$cpf',carteiraTrab='$cart',salario='$sal',dataContratacao='$datac',situacao='$situacao' WHERE id='$id'";
+    $query = "UPDATE $table SET nome='$nome',sobrenome='$sobrenome',idade='$idade',rg='$rg',cpf='$cpf',carteiraTrab='$cart',salario='$sal',dataContratacao='$datac' WHERE id='$id'";
 
 
     //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
@@ -384,18 +384,25 @@ function updateExercise($table, $dados){
 }
 
 function deleteExercise($table, $id){
+    $rotina = "SELECT rotinaID FROM rotina WHERE ex1 = $id OR ex2 = $id OR ex3 = $id OR ex4 = $id OR ex5 = $id";
+    $rotinatrue = mysqli_query(connection(), $rotina);
+
+    if ($rotinatrue->num_rows >= 1){
+
+    } else {
+
+        //Criando a query, com o nome das colunas e valores inseridos.
+        $query = "DELETE FROM $table WHERE exercicioID=$id";
 
 
+        //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
+        $result = mysqli_query(connection(), $query);
+        if ($result) {
+            echo "Delete deu certo";
+        } else echo "Delete deu errado seu BURRO";
+    }
 
-    //Criando a query, com o nome das colunas e valores inseridos.
-    $query = "DELETE FROM $table WHERE exercicioID=$id";
-
-
-    //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
-    $result = mysqli_query(connection(), $query);
-    if ($result) {
-        echo "Delete deu certo";
-    } else echo "Delete deu errado seu BURRO";
+    
 }
 
 //Funções de Aparelho
@@ -594,8 +601,9 @@ function createRoutine($table){
 }
 
 function setRoutine($id){
-            $query = "UPDATE TABLE usuario SET temrotina='1' WHERE ID=$id";
+            $query = "UPDATE usuario SET temrotina='1' WHERE ID=$id";
             mysqli_query(connection(), $query);
+            redirectTo('rotina/index.php');
 }
 
 function indexRoutine($table){

@@ -5,6 +5,5 @@ $id = $_GET['id'];
 
 deleteExercise('exercicio', $id);
 
-header("Location: index.php");
 
 ?>
