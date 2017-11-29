@@ -1,5 +1,6 @@
 <?php
 include_once '../functions.php';
+auth();
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +14,18 @@ include_once '../functions.php';
     <link href="../css/stylesheetjr.css" rel="stylesheet">
 </head>
 <body>
-<?php include_once '../header.php'; ?>
+<?php include_once '../header.php';
+$ap = findAllMachines();
+$ap2 = findAllMachines();
+$ap3 = findAllMachines();
+$ap4 = findAllMachines();
+$ap5 = findAllMachines();
+$ex = findAllExercises();
+$ex2 = findAllExercises();
+$ex3 = findAllExercises();
+$ex4 = findAllExercises();
+$ex5 = findAllExercises();
+?>
 
 <div class="container mt-3">
     <div class="card">
@@ -22,137 +34,182 @@ include_once '../functions.php';
         </div>
 
         <div class="card-block">
-            <form>
-                <!--Ex-->
+            <form action="edit.php?id=<?php echo $_GET['id'];?>" method="post">
+                <input type="hidden" name="id" value="<?php echo $row['$id'];?>">
+
+                <!--Cada formulário de rotina-->
                 <label>Exercício 1</label>
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">Aparelho</label>
-                    <select class="form-control" id="exampleFormControlSelect1" name="aparelho2">
-                        <option>Aparelho1</option>
-                        <option>Aparelho2</option>
-                        <option>Aparelho3</option>
+                    <select class="form-control" id="exampleFormControlSelect1" name="ap1">
+                        <?php while($row = mysqli_fetch_assoc($ap)) {
+                            echo "<option value=" . $row['aparelhoID'] . ">" . $row['modelo'] . "</option>";
+                        }
+                        ?>
                     </select>
+
                 </div>
+
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">Exercício</label>
-                    <select class="form-control" id="exampleFormControlSelect1" name="exercicio1">
-                        <option>Exercício1</option>
-                        <option>Exercício2</option>
-                        <option>Exercício3</option>
+                    <select class="form-control" id="exampleFormControlSelect1" name="ex1">
+                        <?php while($row = mysqli_fetch_assoc($ex)){
+                            echo "<option value=" . $row['exercicioID'] . ">" . $row['nome'] . "</option>";
+                        }
+                        ?>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label>Repetições</label>
-                    <input type="textfield" name="repeticoes1" class="form-control">
-                </div><br><br>
-                <!--Ex-->
+                    <input type="number" name="rep1" class="form-control">
+                </div>
+                <br><br><br>
 
-                <!--Ex-->
+                <!--Fim do formulário de rotina-->
+
+
+                <!--Cada formulário de rotina-->
                 <label>Exercício 2</label>
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">Aparelho</label>
-                    <select class="form-control" id="exampleFormControlSelect1" name="aparelho2">
-                        <option>Aparelho1</option>
-                        <option>Aparelho2</option>
-                        <option>Aparelho3</option>
+                    <select class="form-control" id="exampleFormControlSelect1" name="ap2">
+                        <?php while($row = mysqli_fetch_assoc($ap2)) {
+                            echo "<option value=" . $row['aparelhoID'] . ">" . $row['modelo'] . "</option>";
+                        }
+                        ?>
                     </select>
+
                 </div>
+
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">Exercício</label>
-                    <select class="form-control" id="exampleFormControlSelect1" name="exercicio1">
-                        <option>Exercício1</option>
-                        <option>Exercício2</option>
-                        <option>Exercício3</option>
+                    <select class="form-control" id="exampleFormControlSelect1" name="ex2">
+                        <?php while($row = mysqli_fetch_assoc($ex2)){
+                            echo "<option value=" . $row['exercicioID'] . ">" . $row['nome'] . "</option>";
+                        }
+                        ?>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label>Repetições</label>
-                    <input type="textfield" name="repeticoes1" class="form-control">
-                </div><br><br>
-                <!--Ex-->
+                    <input type="number" name="rep2" class="form-control">
+                </div>
+                <br><br><br>
 
-                <!--Ex-->
+                <!--Fim do formulário de rotina-->
+
+
+
+                <!--Cada formulário de rotina-->
                 <label>Exercício 3</label>
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">Aparelho</label>
-                    <select class="form-control" id="exampleFormControlSelect1" name="aparelho2">
-                        <option>Aparelho1</option>
-                        <option>Aparelho2</option>
-                        <option>Aparelho3</option>
+                    <select class="form-control" id="exampleFormControlSelect1" name="ap3">
+                        <?php while($row = mysqli_fetch_assoc($ap3)) {
+                            echo "<option value=" . $row['aparelhoID'] . ">" . $row['modelo'] . "</option>";
+                        }
+                        ?>
                     </select>
+
                 </div>
+
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">Exercício</label>
-                    <select class="form-control" id="exampleFormControlSelect1" name="exercicio1">
-                        <option>Exercício1</option>
-                        <option>Exercício2</option>
-                        <option>Exercício3</option>
+                    <select class="form-control" id="exampleFormControlSelect1" name="ex3">
+                        <?php while($row = mysqli_fetch_assoc($ex3)){
+                            echo "<option value=" . $row['exercicioID'] . ">" . $row['nome'] . "</option>";
+                        }
+                        ?>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label>Repetições</label>
-                    <input type="textfield" name="repeticoes1" class="form-control">
-                </div><br><br>
-                <!--Ex-->
+                    <input type="number" name="rep3" class="form-control">
+                </div>
+                <br><br><br>
 
-                <!--Ex-->
+                <!--Fim do formulário de rotina-->
+
+
+                <!--Cada formulário de rotina-->
                 <label>Exercício 4</label>
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">Aparelho</label>
-                    <select class="form-control" id="exampleFormControlSelect1" name="aparelho2">
-                        <option>Aparelho1</option>
-                        <option>Aparelho2</option>
-                        <option>Aparelho3</option>
+                    <select class="form-control" id="exampleFormControlSelect1" name="ap4">
+                        <?php while($row = mysqli_fetch_assoc($ap4)) {
+                            echo "<option value=" . $row['aparelhoID'] . ">" . $row['modelo'] . "</option>";
+                        }
+                        ?>
                     </select>
+
                 </div>
+
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">Exercício</label>
-                    <select class="form-control" id="exampleFormControlSelect1" name="exercicio1">
-                        <option>Exercício1</option>
-                        <option>Exercício2</option>
-                        <option>Exercício3</option>
+                    <select class="form-control" id="exampleFormControlSelect1" name="ex4">
+                        <?php while($row = mysqli_fetch_assoc($ex4)){
+                            echo "<option value=" . $row['exercicioID'] . ">" . $row['nome'] . "</option>";
+                        }
+                        ?>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label>Repetições</label>
-                    <input type="textfield" name="repeticoes1" class="form-control">
-                </div><br><br>
-                <!--Ex-->
+                    <input type="number" name="rep4" class="form-control">
+                </div>
+                <br><br><br>
 
-                <!--Ex-->
+                <!--Fim do formulário de rotina-->
+
+                <!--Cada formulário de rotina-->
                 <label>Exercício 5</label>
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">Aparelho</label>
-                    <select class="form-control" id="exampleFormControlSelect1" name="aparelho2">
-                        <option>Aparelho1</option>
-                        <option>Aparelho2</option>
-                        <option>Aparelho3</option>
+                    <select class="form-control" id="exampleFormControlSelect1" name="ap5">
+                        <?php while($row = mysqli_fetch_assoc($ap5)) {
+                            echo "<option value=" . $row['aparelhoID'] . ">" . $row['modelo'] . "</option>";
+                        }
+                        ?>
                     </select>
+
                 </div>
+
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">Exercício</label>
-                    <select class="form-control" id="exampleFormControlSelect1" name="exercicio1">
-                        <option>Exercício1</option>
-                        <option>Exercício2</option>
-                        <option>Exercício3</option>
+                    <select class="form-control" id="exampleFormControlSelect1" name="ex5">
+                        <?php while($row = mysqli_fetch_assoc($ex5)){
+                            echo "<option value=" . $row['exercicioID'] . ">" . $row['nome'] . "</option>";
+                        }
+                        ?>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label>Repetições</label>
-                    <input type="textfield" name="repeticoes1" class="form-control">
-                </div><br><br>
-                <!--Ex-->
+                    <input type="number" name="rep5" class="form-control">
+                </div>
+                <br>
 
-                <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                <!--Fim do formulário de rotina-->
+
+                <button type="submit" name="submit" class="btn btn-primary" style="display:inline-block;">Enviar</button>
+
+                <a class="btn btn-primary pull-right" href="index.php" role="button">Voltar ao Index</a>
             </form>
         </div>
     </div>
 </div>
+
+<?php
+$table = 'rotina';
+if(isset($_POST["submit"])) {
+    updateRoutine($table, $_POST);
+}
+?>
 
 <script src="../js/libs/jquery.min.js"></script>
 <script src="../js/libs/tether.min.js"></script>

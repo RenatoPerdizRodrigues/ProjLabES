@@ -1,5 +1,6 @@
 <?php
 include_once '../functions.php';
+auth();
 ?>
 
 <!DOCTYPE html>
@@ -56,12 +57,14 @@ $var = findTrainer('treinador', $_GET['id']);
             }
             ?>
 
-
-
+            </tbody>
+        </table>
 
     </div>
+
+    <a class="btn btn-primary pull-right" href="index.php" role="button">Voltar ao Index</a>
 </div>
-</div>
+
 
 <script src="../js/libs/jquery.min.js"></script>
 <script src="../js/libs/tether.min.js"></script>

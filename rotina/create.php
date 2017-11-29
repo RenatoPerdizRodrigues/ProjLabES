@@ -1,5 +1,6 @@
 <?php
 include_once '../functions.php';
+auth();
 ?>
 
 <!DOCTYPE html>
@@ -24,8 +25,6 @@ $ex2 = findAllExercises();
 $ex3 = findAllExercises();
 $ex4 = findAllExercises();
 $ex5 = findAllExercises();
-
-
 ?>
 
 <div class="container mt-3">
@@ -197,7 +196,9 @@ $ex5 = findAllExercises();
 
                 <!--Fim do formulário de rotina-->
 
-                <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" name="submit" class="btn btn-primary" style="display:inline-block;">Enviar</button>
+
+                <a class="btn btn-primary pull-right" href="index.php" role="button">Voltar ao Index</a>
             </form>
         </div>
     </div>
@@ -205,7 +206,8 @@ $ex5 = findAllExercises();
 
 <?php
 $table = 'rotina';
-createRoutine($table);
+$id = $_GET['id'];
+createRoutine($table, $id);
 ?>
 
 <script src="../js/libs/jquery.min.js"></script>

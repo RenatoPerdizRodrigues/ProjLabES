@@ -1,5 +1,6 @@
 <?php
 include_once '../functions.php';
+auth();
 ?>
 
 <!DOCTYPE html>
@@ -22,6 +23,9 @@ $var = indexUser($table);
 
 
     <div class="container mt-3">
+        <?php {
+            checkForSuccess();
+        } ?>
         <div class="card">
             <div class="card-header">
                 <h1 class="h5 m-0">Lista de Usuários</h1>

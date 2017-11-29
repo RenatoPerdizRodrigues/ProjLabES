@@ -1,5 +1,6 @@
 <?php
 include_once '../functions.php';
+auth();
 ?>
 
 <!DOCTYPE html>
@@ -60,7 +61,10 @@ include_once '../functions.php';
                     <input type="number" name="peso" class="form-control" value="<?php echo $row['peso'];?>">
                 </div>
 
-                <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" name="submit" class="btn btn-primary" style="display:inline-block;">Enviar</button>
+
+                <a class="btn btn-primary pull-right" href="index.php" role="button">Voltar ao Index</a>
+
             </form>
         </div>
     </div>

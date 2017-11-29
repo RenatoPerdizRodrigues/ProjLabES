@@ -1,8 +1,10 @@
 <?php
     include_once '../functions.php';
 
+
     // Faz a autenticacao
     auth();
+
 ?>
 
 <!DOCTYPE html>
@@ -25,6 +27,10 @@ $var = indexTrainer($table);
 
 
 <div class="container mt-3">
+    <?php {
+    checkForSuccess();
+    } ?>
+
     <div class="card">
         <div class="card-header">
             <h1 class="h5 m-0">Lista de Treinadores</h1>

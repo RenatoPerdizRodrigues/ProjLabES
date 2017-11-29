@@ -1,5 +1,6 @@
 <?php
 include_once '../functions.php';
+auth();
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +23,10 @@ $var = indexMachine($table);
 
 
 <div class="container mt-3">
-    <?php checkForErrors(); ?>
+    <?php
+    checkForErrors();
+    checkForSuccess();
+    ?>
     <div class="card">
         <div class="card-header">
             <h1 class="h5 m-0">Lista de Aparelhos</h1>

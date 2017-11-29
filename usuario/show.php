@@ -1,5 +1,6 @@
 <?php
 include_once '../functions.php';
+auth();
 ?>
 
 <!DOCTYPE html>
@@ -63,9 +64,8 @@ $var = findUser('usuario', $_GET['id']);
         </table>
 
 
-
-
         </div>
+    <a class="btn btn-primary pull-right" href="index.php" role="button">Voltar ao Index</a>
     </div>
 </div>
 

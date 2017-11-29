@@ -1,5 +1,6 @@
 <?php
 include_once '../functions.php';
+auth();
 
 $id = $_GET['id'];
 
@@ -12,10 +13,13 @@ $query = "UPDATE treinador set situacao = 'Inativo' WHERE ID = " . $id;
 
 //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
 $result = mysqli_query($connection, $query);
-if ($result) {
-    echo "Treinador inativado.";
-    } echo "Não foi possível inativar.";
+if (!$result) {
+    $_SESSION['error'] = 'Não foi possível inativar.';
+} else {
+    $_SESSION['success'] = 'O treinador foi inativado.';
+}
 
-header("Location: index.php");
+redirectTo('treinador/index.php');
+
 
 ?>

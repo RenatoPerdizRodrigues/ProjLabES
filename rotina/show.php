@@ -1,5 +1,6 @@
 <?php
 include_once '../functions.php';
+auth();
 ?>
 
 <!DOCTYPE html>
@@ -18,6 +19,10 @@ $var = findRoutine('rotina', $_GET['id']);
 ?>
 
 <div class="container mt-3">
+    <?php
+    checkForErrors();
+    checkForSuccess();
+    ?>
     <div class="card">
         <div class="card-header">
             <h1 class="h5 m-0">Rotina do Usuário</h1>
@@ -72,6 +77,7 @@ $var = findRoutine('rotina', $_GET['id']);
             }
         ?>
     </div>
+    <a class="btn btn-primary pull-right" href="index.php" role="button">Voltar ao Index</a>
 </div>
 </div>
 

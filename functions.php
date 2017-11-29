@@ -14,6 +14,12 @@ function redirectTo($page) {
     exit();
 }
 
+// Redirect to
+function redirectToMessage($page) {
+    header("Location: " . ROOT_FOLDER . $page . "?success=1");
+    exit();
+}
+
 //Messages
 function checkForErrors() {
     if(isset($_SESSION['error']) && $_SESSION['error'] !== '') {
@@ -150,8 +156,11 @@ function createTrainer($table){
         //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
         $result = mysqli_query(connection(), $query);
         if (!$result) {
-            echo "Inserção deu errado!";
-        } else echo "Inserção deu certo!";
+            $_SESSION['error'] = 'Não foi possível cadastrar.';
+        } else {
+            $_SESSION['success'] = 'O treinador foi cadastrado.';
+        }
+        redirectTo('treinador/index.php');
     }
 
 }
@@ -197,11 +206,12 @@ function updateTrainer($table, $dados){
 
     //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
     $result = mysqli_query(connection(), $query);
-    if ($result) {
-        echo "Edit deu certo";
-    } else echo "Edit deu errado seu BURRO";
-
-    header("Location: index.php");
+    if (!$result) {
+        $_SESSION['error'] = 'Não foi possível atualizar.';
+    } else {
+        $_SESSION['success'] = 'O treinador foi atualizado.';
+    }
+    redirectTo('treinador/index.php');
 }
 
 function deleteTrainer($table, $id){
@@ -214,9 +224,12 @@ function deleteTrainer($table, $id){
 
     //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
     $result = mysqli_query(connection(), $query);
-    if ($result) {
-        echo "Delete deu certo";
-    } else echo "Delete deu errado seu BURRO";
+    if (!$result) {
+        $_SESSION['error'] = 'Não foi possível excluir.';
+    } else {
+        $_SESSION['success'] = 'O treinador foi excluído.';
+    }
+    redirectTo('treinador/index.php');
 }
 
 //Funções de Usuário
@@ -243,10 +256,12 @@ function createUser($table){
         //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
         $result = mysqli_query(connection(), $query);
         if (!$result) {
-            echo "Inserção deu errado!";
-        } else echo "Inserção deu certo!";
+            $_SESSION['error'] = 'Não foi possível criar o usuário.';
+        } else {
+            $_SESSION['success'] = 'O usuário foi criado.';
+        }
+        redirectTo('usuario/index.php');
     }
-
 }
 
 function indexUser($table){
@@ -299,11 +314,12 @@ function updateUser($table, $dados){
 
     //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
     $result = mysqli_query(connection(), $query);
-    if ($result) {
-        echo "Edit deu certo";
-    } else echo "Edit deu errado seu BURRO";
-
-    header("Location: index.php");
+    if (!$result) {
+        $_SESSION['error'] = 'Não foi possível atualizar o usuário.';
+    } else {
+        $_SESSION['success'] = 'O usuário foi atualizado.';
+    }
+    redirectTo('usuario/index.php');
 }
 
 function deleteUser($table, $id){
@@ -316,9 +332,12 @@ function deleteUser($table, $id){
 
     //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
     $result = mysqli_query(connection(), $query);
-    if ($result) {
-        echo "Delete deu certo";
-    } else echo "Delete deu errado seu BURRO";
+    if (!$result) {
+        $_SESSION['error'] = 'O usuário não pôde ser excluído.';
+    } else {
+        $_SESSION['success'] = 'O usário foi excluído.';
+    }
+    redirectTo('usuario/index.php');
 }
 
 //Funções de Exercício
@@ -335,9 +354,12 @@ function createExercise($table){
 
         //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
         $result = mysqli_query(connection(), $query);
-        if(!$result){
-            echo "Inserção deu errado!";
-        } else echo "Inserção deu certo!";
+        if (!$result) {
+            $_SESSION['error'] = 'O exercício não pôde ser excluído.';
+        } else {
+            $_SESSION['success'] = 'O exercício foi cadastrado.';
+        }
+        redirectTo('exercicioap/index.php');
     }
 }
 
@@ -407,11 +429,12 @@ function updateExercise($table, $dados){
 
     //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
     $result = mysqli_query(connection(), $query);
-    if ($result) {
-        echo "Edit deu certo";
-    } else echo "Edit deu errado seu BURRO";
-
-    header("Location: index.php");
+    if (!$result) {
+        $_SESSION['error'] = 'O usuário não pôde ser atualizado.';
+    } else {
+        $_SESSION['success'] = 'O exercício foi atualizado.';
+    }
+    redirectTo('exercicioap/index.php');
 }
 
 function deleteExercise($table, $id){
@@ -419,7 +442,7 @@ function deleteExercise($table, $id){
     $rotinatrue = mysqli_query(connection(), $rotina);
 
     if ($rotinatrue->num_rows >= 1) {
-        $_SESSION['error'] = 'Não foi possível excluir.';
+        $_SESSION['error'] = 'Não foi possível excluir este exercício pois ele está atrelado a uma rotina.';
     }else {
         //Criando a query, com o nome das colunas e valores inseridos.
         $query = "DELETE FROM $table WHERE exercicioID=$id";
@@ -430,7 +453,7 @@ function deleteExercise($table, $id){
         if (!$result) {
             $_SESSION['error'] = 'Não foi possível excluir.';
         } else {
-            $_SESSION['success'] = 'Excluiu.';
+            $_SESSION['success'] = 'O exercício foi excluído.';
         }
     }
 
@@ -438,7 +461,8 @@ function deleteExercise($table, $id){
 }
 
 //Funções de Aparelho
-function createMachine($table){
+function createMachine($table)
+{
     if (isset($_POST["submit"])) {
         $marca = $_POST["modelo"];
         $modelo = $_POST["marca"];
@@ -452,12 +476,15 @@ function createMachine($table){
 
         //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
         $result = mysqli_query(connection(), $query);
-        var_dump($query);
         if (!$result) {
-            echo "Inserção deu errado!";
-        } else echo "Inserção deu certo!";
-    }
+            $_SESSION['error'] = 'Não foi possível criar o aparelho.';
+        } else {
+            $_SESSION['success'] = 'O aparelho foi criado.';
+        }
 
+        redirectTo('aparelho/index.php');
+
+    }
 }
 
 function indexMachine($table){
@@ -527,27 +554,34 @@ function updateMachine($table, $dados){
 
     //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
     $result = mysqli_query(connection(), $query);
-    if ($result) {
-        echo "Edit deu certo";
-    } else echo "Edit deu errado seu BURRO";
+    if (!$result) {
+        $_SESSION['error'] = 'Não foi possível atualizar o aparelho.';
+    } else {
+        $_SESSION['success'] = 'O aparelho foi atualizado.';
+    }
 
-    header("Location: index.php");
+    redirectTo('aparelho/index.php');
 }
 
 function deleteMachine($table, $id){
+
     $rotina = "SELECT rotinaID FROM rotina WHERE ap1 = $id OR ap2 = $id OR ap3 = $id OR ap4 = $id OR ap5 = $id";
     $rotinatrue = mysqli_query(connection(), $rotina);
 
     if ($rotinatrue->num_rows >= 1) {
-        $_SESSION['error'] = 'Não foi possível excluir.';
+        $_SESSION['error'] = 'Não foi possível excluir este aparelho pois ele está atrelado a uma rotina.';
     }else {
         //Criando a query, com o nome das colunas e valores inseridos.
         $query = "DELETE FROM $table WHERE aparelhoID=$id";
 
         //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
+
         $result = mysqli_query(connection(), $query);
         if (!$result) {
-            $_SESSION['error'] = 'Não foi possível excluir.';
+            $_SESSION['error'] = 'Não foi possível excluir o aparelho.';
+        } else {
+            echo 'estamos aqui';
+            $_SESSION['success'] = 'O aparelho foi excluído.';
         }
     }
 
@@ -575,9 +609,6 @@ function findAllMachines(){
 
 function findAllExercises(){
 
-
-
-
     //Criando a query, com o nome das colunas e valores inseridos.
     $query = "SELECT * FROM exercicio";
 
@@ -590,7 +621,7 @@ function findAllExercises(){
 
 }
 
-function createRoutine($table){
+function createRoutine($table, $id){
     if (isset($_POST["submit"])) {
 
 
@@ -625,11 +656,14 @@ function createRoutine($table){
 
         //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
         $result = mysqli_query(connection(), $query);
-        var_dump($result);
-        if ($result) {
-            echo "Inserção deu certo!";
+        if (!$result) {
+            $_SESSION['error'] = 'Não foi possível atualizar a rotina.';
+        } else {
+            $_SESSION['success'] = 'A rotina foi criada.';
             setRoutine($id, 1);
-        } else echo "Inserção deu errado!";
+        }
+
+        redirectTo('rotina/index.php');
     }
 
 }
@@ -664,6 +698,8 @@ function findRoutine($table, $id){
     //$query = "SELECT * FROM $table INNER JOIN exercicio ON exercicio.exercicioID = rotina.ex1 OR exercicio.exercicioID = rotina.ex2 OR exercicio.exercicioID = rotina.ex3 OR exercicio.exercicioID = rotina.ex4 OR exercicio.exercicioID = rotina.ex5 WHERE rotinaID = " . $id . "";
     $query = "SELECT * FROM $table WHERE rotinaID = " . $id . "";
 
+
+
     $data = array();
     $result = mysqli_query(connection(), $query);
     if ($result) {
@@ -681,26 +717,41 @@ function findRoutine($table, $id){
 
 function updateRoutine($table, $dados){
 
-
-
     $id = $_GET['id'];
-    $marca = $dados["marca"];
-    $modelo = $dados["modelo"];
-    $dataAquisicao = $dados["dataaq"];
-    $ultimaManutencao = $dados["datamanutencao"];
+    $ex1 = $dados["ex1"];
+    $ap1 = $dados["ap1"];
+    $rep1 = $dados["rep1"];
+
+    $ex2 = $dados["ex2"];
+    $ap2 = $dados["ap2"];
+    $rep2 = $dados["rep2"];
+
+    $ex3 = $dados["ex3"];
+    $ap3 = $dados["ap3"];
+    $rep3 = $dados["rep3"];
+
+    $ex4 = $dados["ex4"];
+    $ap4 = $dados["ap4"];
+    $rep4 = $dados["rep4"];
+
+    $ex5 = $dados["ex5"];
+    $ap5 = $dados["ap5"];
+    $rep5 = $dados["rep5"];
 
 
     //Criando a query, com o nome das colunas e valores inseridos.
-    $query = "UPDATE $table SET marca='$marca',modelo='$modelo',dataAquisicao='$dataAquisicao',ultimaManutencao='$ultimaManutencao' WHERE aparelhoID='$id'";
-
-
+    $query = "UPDATE $table SET rotinaID='$id', ex1='$ex1', ap1='$ap1', rep1='$rep1',ex2='$ex2', ap2='$ap2', rep2='$rep2',ex3='$ex3', ap3='$ap3', rep3='$rep3',ex4='$ex4', ap4='$ap4', rep4='$rep4',ex5='$ex5', ap5='$ap5', rep5='$rep5'  WHERE rotinaID='$id'";
     //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
     $result = mysqli_query(connection(), $query);
-    if ($result) {
-        echo "Edit deu certo";
-    } else echo "Edit deu errado seu BURRO";
+    var_dump($query);
+    if (!$result) {
+        $_SESSION['error'] = 'Não foi possível atualizar a rotina.';
+    } else {
+        $_SESSION['success'] = 'A rotina foi atualizada.';
+    }
 
-    header("Location: index.php");
+    redirectTo('rotina/index.php');
+
 }
 
     function deleteRoutine($table, $id){
@@ -710,10 +761,11 @@ function updateRoutine($table, $dados){
 
         //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
         $result = mysqli_query(connection(), $query);
-        if ($result) {
-            setRoutine($id, 0);
+        if (!$result) {
+            $_SESSION['error'] = 'Não foi possível deletar a rotina.';
         } else {
-            $_SESSION['error'] = "Não foi possível deletar rotina.";
+            $_SESSION['success'] = 'A rotina foi deletada.';
+            setRoutine($id, 0);
         }
 
         redirectTo('rotina/index.php');

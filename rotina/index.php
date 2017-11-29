@@ -14,6 +14,7 @@ include_once '../functions.php';
 </head>
 <body>
 <?php include_once '../header.php';
+auth();
 $table = 'usuario';
 $var = indexUser($table);
 ?>
@@ -22,7 +23,10 @@ $var = indexUser($table);
 
 
 <div class="container mt-3">
-    <?php checkForErrors(); ?>
+    <?php
+    checkForErrors();
+    checkForSuccess();
+    ?>
     <div class="card">
         <div class="card-header">
             <h1 class="h5 m-0">Lista de Usuários para Rotinas</h1>
