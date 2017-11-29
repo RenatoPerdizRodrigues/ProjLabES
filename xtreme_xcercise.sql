@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 29-Nov-2017 às 03:06
--- Versão do servidor: 10.1.28-MariaDB
--- PHP Version: 7.1.11
+-- Generation Time: 29-Nov-2017 às 13:18
+-- Versão do servidor: 10.1.25-MariaDB
+-- PHP Version: 5.6.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -36,6 +36,15 @@ CREATE TABLE `aparelho` (
   `ultimaManutencao` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Extraindo dados da tabela `aparelho`
+--
+
+INSERT INTO `aparelho` (`aparelhoID`, `marca`, `modelo`, `dataAquisicao`, `ultimaManutencao`) VALUES
+(1, 'Nakagym', 'Supino Vertical', '2017-01-01', '2017-03-01'),
+(2, 'GymStudio', 'Esteira', '2017-05-04', '2017-06-06'),
+(3, 'Nakagym', 'Cama Flexora', '2017-06-05', '2017-07-07');
+
 -- --------------------------------------------------------
 
 --
@@ -47,6 +56,15 @@ CREATE TABLE `exercicio` (
   `nome` varchar(35) DEFAULT NULL,
   `descricao` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `exercicio`
+--
+
+INSERT INTO `exercicio` (`exercicioID`, `nome`, `descricao`) VALUES
+(1, 'Abdominal', 'Deitado, de costas.'),
+(2, 'FlexÃ£o', 'De barriga para baixo.'),
+(3, 'Polichinelo', 'Pular e abrir braÃ§os e pernas.');
 
 -- --------------------------------------------------------
 
@@ -72,6 +90,13 @@ CREATE TABLE `rotina` (
   `ap5` int(11) DEFAULT NULL,
   `rep5` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `rotina`
+--
+
+INSERT INTO `rotina` (`rotinaID`, `ex1`, `ap1`, `rep1`, `ex2`, `ap2`, `rep2`, `ex3`, `ap3`, `rep3`, `ex4`, `ap4`, `rep4`, `ex5`, `ap5`, `rep5`) VALUES
+(1, 2, 2, 4, 1, 1, 2, 3, 2, 5, 3, 1, 6, 1, 3, 2);
 
 -- --------------------------------------------------------
 
@@ -99,7 +124,9 @@ CREATE TABLE `treinador` (
 --
 
 INSERT INTO `treinador` (`id`, `nome`, `sobrenome`, `idade`, `RG`, `CPF`, `carteiraTrab`, `salario`, `dataContratacao`, `situacao`, `permissao`, `senha`) VALUES
-(1, 'admin', NULL, NULL, '12345', NULL, NULL, NULL, NULL, NULL, 3, '$2y$10$upn1970UnI7mw19jgueiqOyOD447ywNFWLza8/LyryqZ1Cu5PutHO');
+(1, 'admin', NULL, NULL, '12345', NULL, NULL, NULL, NULL, NULL, 3, '$2y$10$upn1970UnI7mw19jgueiqOyOD447ywNFWLza8/LyryqZ1Cu5PutHO'),
+(2, 'JosÃ©', 'Arantes Nascimento', 29, '265486984', '43606064861', '12345', 3500, '2017-04-02', 'Ativo', 1, '$2y$10$YA6gaTsUeVEd4KgDHAqAZOEvpihZv6SY/lMQTeMbxQuWbSbl8UODO'),
+(3, 'Rodrigo', 'Pereira', 29, '849652587', '43606064861', '12345', 2800, '2017-02-02', 'Ativo', 1, '$2y$10$hv19e7MvUlJyakFs57DEd.JiqofyyUO2f6vZUSFJ6H8ANqITmLUmK');
 
 -- --------------------------------------------------------
 
@@ -121,6 +148,14 @@ CREATE TABLE `usuario` (
   `senha` varchar(60) DEFAULT NULL,
   `temrotina` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `usuario`
+--
+
+INSERT INTO `usuario` (`id`, `nome`, `sobrenome`, `idade`, `RG`, `CPF`, `sexo`, `altura`, `peso`, `permissao`, `senha`, `temrotina`) VALUES
+(1, 'Isabela', 'Almeida', 35, '548726598', '43606064861', 'Feminino', 170, 64, 0, '$2y$10$QzSZiOQp3q4.K6tb57ILwuQrmyi5VwoMTdrC.atJkUF6GrjjSEXiW', 1),
+(2, 'Mario', 'Rodrigues', 25, '514987524', '43606064861', 'Masculino', 150, 65, 0, '$2y$10$IViw6CDbu7jNTwRhCigFXuYxlge6fDR2TmLeipyhKwbcRJpx5/oZO', 0);
 
 --
 -- Indexes for dumped tables
@@ -174,26 +209,22 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT for table `aparelho`
 --
 ALTER TABLE `aparelho`
-  MODIFY `aparelhoID` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `aparelhoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `exercicio`
 --
 ALTER TABLE `exercicio`
-  MODIFY `exercicioID` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `exercicioID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `treinador`
 --
 ALTER TABLE `treinador`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Constraints for dumped tables
 --

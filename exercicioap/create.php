@@ -1,6 +1,6 @@
 <?php
-include_once '../functions.php';
-auth();
+    include_once '../functions.php';
+    auth();
 ?>
 
 <!DOCTYPE html>
@@ -23,14 +23,51 @@ auth();
         </div>
 
         <div class="card-block">
+            <?php
+                $table = 'exercicio';
+
+                if(isset($_POST['submit'])) {
+                    $erros = 0;
+
+                    // Se nao tiver setado ou estiver vazio
+                    if(!isset($_POST['nome']) || $_POST['nome'] === '') {
+                        $erro_nome = 'Nome é obrigatório';
+                        $erros++;
+                    }
+
+                    if(!isset($_POST['descricao']) || $_POST['descricao'] === '') {
+                        $erro_descricao = 'Descrição é obrigatório';
+                        $erros++;
+                    }
+
+                    if(!$erros) {
+                        createExercise($table);
+                    }
+                }
+            ?>
+
             <form action="create.php" method="post">
                 <div class="form-group">
                     <label>Nome</label>
                     <input type="textfield" name="nome" class="form-control">
+                    <?php
+                        if(isset($erro_nome)) {
+                            echo '<small class="text-danger">';
+                                echo $erro_nome;
+                            echo '</small>';
+                        }
+                    ?>
                 </div>
                 <div class="form-group">
                     <label>Descrição</label>
                     <input type="textfield" name="descricao" class="form-control">
+                    <?php
+                        if(isset($erro_descricao)) {
+                            echo '<small class="text-danger">';
+                                echo $erro_descricao;
+                            echo '</small>';
+                        }
+                    ?>
                 </div>
 
                 <button type="submit" name="submit" class="btn btn-primary" style="display:inline-block;">Enviar</button>
@@ -40,10 +77,6 @@ auth();
         </div>
     </div>
 </div>
-
-    <?php
-    $table = 'exercicio';
-    createExercise($table)?>
 
 <script src="../js/libs/jquery.min.js"></script>
 <script src="../js/libs/tether.min.js"></script>
