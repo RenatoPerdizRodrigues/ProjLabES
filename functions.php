@@ -387,30 +387,25 @@ function deleteExercise($table, $id){
     $rotina = "SELECT rotinaID FROM rotina WHERE ex1 = $id OR ex2 = $id OR ex3 = $id OR ex4 = $id OR ex5 = $id";
     $rotinatrue = mysqli_query(connection(), $rotina);
 
-    if ($rotinatrue->num_rows >= 1){
-
-    } else {
-
+    if ($rotinatrue->num_rows >= 1) {
+        $_SESSION['error'] = 'Não foi possível excluir.';
+    }else {
         //Criando a query, com o nome das colunas e valores inseridos.
         $query = "DELETE FROM $table WHERE exercicioID=$id";
 
-
         //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
         $result = mysqli_query(connection(), $query);
-        if ($result) {
-            echo "Delete deu certo";
-        } else echo "Delete deu errado seu BURRO";
+        if (!$result) {
+            $_SESSION['error'] = 'Não foi possível excluir.';
+        }
     }
 
-    
+    redirectTo('exercicioap/index.php');
 }
 
 //Funções de Aparelho
 function createMachine($table){
     if (isset($_POST["submit"])) {
-
-
-
         $marca = $_POST["modelo"];
         $modelo = $_POST["marca"];
         $dataAquisicao = $_POST["dataaq"];

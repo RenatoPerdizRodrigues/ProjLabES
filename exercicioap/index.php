@@ -1,5 +1,6 @@
 <?php
-include_once '../functions.php';
+    session_start();
+    include_once '../functions.php';
 ?>
 
 <!DOCTYPE html>
@@ -22,6 +23,15 @@ include_once '../functions.php';
 
 
 <div class="container mt-3">
+    <?php
+        if(isset($_SESSION['error']) && $_SESSION['error'] !== '') {
+            echo '<div class="alert alert-danger" role="alert">';
+            echo $_SESSION['error'];
+            echo '</div>';
+
+            unset($_SESSION['error']);
+        }
+    ?>
     <div class="card">
         <div class="card-header">
             <h1 class="h5 m-0">Lista de Exercícios</h1>
