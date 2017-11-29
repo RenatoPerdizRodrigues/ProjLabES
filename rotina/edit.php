@@ -41,7 +41,7 @@ $ex5 = findAllExercises();
                 <label>Exercício 1</label>
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">Aparelho</label>
-                    <select class="form-control" id="exampleFormControlSelect1" name="ap1">
+                    <select class="form-control" id="exampleFormControlSelect1" name="ap1" required>
                         <?php while($row = mysqli_fetch_assoc($ap)) {
                             echo "<option value=" . $row['aparelhoID'] . ">" . $row['modelo'] . "</option>";
                         }
@@ -52,7 +52,7 @@ $ex5 = findAllExercises();
 
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">Exercício</label>
-                    <select class="form-control" id="exampleFormControlSelect1" name="ex1">
+                    <select class="form-control" id="exampleFormControlSelect1" name="ex1" required>
                         <?php while($row = mysqli_fetch_assoc($ex)){
                             echo "<option value=" . $row['exercicioID'] . ">" . $row['nome'] . "</option>";
                         }
@@ -62,7 +62,7 @@ $ex5 = findAllExercises();
 
                 <div class="form-group">
                     <label>Repetições</label>
-                    <input type="number" name="rep1" class="form-control">
+                    <input type="number" name="rep1" class="form-control" required>
                 </div>
                 <br><br><br>
 
@@ -73,7 +73,7 @@ $ex5 = findAllExercises();
                 <label>Exercício 2</label>
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">Aparelho</label>
-                    <select class="form-control" id="exampleFormControlSelect1" name="ap2">
+                    <select class="form-control" id="exampleFormControlSelect1" name="ap2" required>
                         <?php while($row = mysqli_fetch_assoc($ap2)) {
                             echo "<option value=" . $row['aparelhoID'] . ">" . $row['modelo'] . "</option>";
                         }
@@ -84,7 +84,7 @@ $ex5 = findAllExercises();
 
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">Exercício</label>
-                    <select class="form-control" id="exampleFormControlSelect1" name="ex2">
+                    <select class="form-control" id="exampleFormControlSelect1" name="ex2" required>
                         <?php while($row = mysqli_fetch_assoc($ex2)){
                             echo "<option value=" . $row['exercicioID'] . ">" . $row['nome'] . "</option>";
                         }
@@ -94,7 +94,7 @@ $ex5 = findAllExercises();
 
                 <div class="form-group">
                     <label>Repetições</label>
-                    <input type="number" name="rep2" class="form-control">
+                    <input type="number" name="rep2" class="form-control" required>
                 </div>
                 <br><br><br>
 
@@ -106,7 +106,7 @@ $ex5 = findAllExercises();
                 <label>Exercício 3</label>
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">Aparelho</label>
-                    <select class="form-control" id="exampleFormControlSelect1" name="ap3">
+                    <select class="form-control" id="exampleFormControlSelect1" name="ap3" required>
                         <?php while($row = mysqli_fetch_assoc($ap3)) {
                             echo "<option value=" . $row['aparelhoID'] . ">" . $row['modelo'] . "</option>";
                         }
@@ -117,7 +117,7 @@ $ex5 = findAllExercises();
 
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">Exercício</label>
-                    <select class="form-control" id="exampleFormControlSelect1" name="ex3">
+                    <select class="form-control" id="exampleFormControlSelect1" name="ex3" required>
                         <?php while($row = mysqli_fetch_assoc($ex3)){
                             echo "<option value=" . $row['exercicioID'] . ">" . $row['nome'] . "</option>";
                         }
@@ -127,7 +127,7 @@ $ex5 = findAllExercises();
 
                 <div class="form-group">
                     <label>Repetições</label>
-                    <input type="number" name="rep3" class="form-control">
+                    <input type="number" name="rep3" class="form-control" required>
                 </div>
                 <br><br><br>
 
@@ -138,7 +138,7 @@ $ex5 = findAllExercises();
                 <label>Exercício 4</label>
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">Aparelho</label>
-                    <select class="form-control" id="exampleFormControlSelect1" name="ap4">
+                    <select class="form-control" id="exampleFormControlSelect1" name="ap4" required>
                         <?php while($row = mysqli_fetch_assoc($ap4)) {
                             echo "<option value=" . $row['aparelhoID'] . ">" . $row['modelo'] . "</option>";
                         }
@@ -149,7 +149,7 @@ $ex5 = findAllExercises();
 
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">Exercício</label>
-                    <select class="form-control" id="exampleFormControlSelect1" name="ex4">
+                    <select class="form-control" id="exampleFormControlSelect1" name="ex4" required>
                         <?php while($row = mysqli_fetch_assoc($ex4)){
                             echo "<option value=" . $row['exercicioID'] . ">" . $row['nome'] . "</option>";
                         }
@@ -159,7 +159,7 @@ $ex5 = findAllExercises();
 
                 <div class="form-group">
                     <label>Repetições</label>
-                    <input type="number" name="rep4" class="form-control">
+                    <input type="number" name="rep4" class="form-control" required>
                 </div>
                 <br><br><br>
 

@@ -34,19 +34,19 @@ if(isset($_POST["submit"])){
             <form  action="edit.php?id=<?php echo $_GET['id'];?>" method="post">
                 <div class="form-group">
                     <label>Modelo</label>
-                    <input type="textfield" name="modelo" class="form-control" value="<?php echo $row['modelo'];?>">
+                    <input type="textfield" name="modelo" class="form-control" value="<?php echo $row['modelo'];?>" required>
                 </div>
                 <div class="form-group">
                     <label>Marca</label>
-                    <input type="texfield" name="marca" class="form-control" value="<?php echo $row['marca'];?>">
+                    <input type="texfield" name="marca" class="form-control" value="<?php echo $row['marca'];?>" required>
                 </div>
                 <div class="form-group">
                     <label>Data de Aquisição</label>
-                    <input type="date" name="dataaq" class="form-control" value="<?php echo $row['dataAquisicao'];?>">
+                    <input type="date" name="dataaq" class="form-control" value="<?php echo $row['dataAquisicao'];?>" required>
                 </div>
                 <div class="form-group">
                     <label>Última Manutenção</label>
-                    <input type="date" name="datamanutencao" class="form-control" value="<?php echo $row['ultimaManutencao'];?>">
+                    <input type="date" name="datamanutencao" class="form-control" value="<?php echo $row['ultimaManutencao'];?>" required>
                 </div>
 
                 <button type="submit" name="submit" class="btn btn-primary" style="display:inline-block;">Enviar</button>

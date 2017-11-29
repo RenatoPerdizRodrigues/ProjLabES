@@ -26,19 +26,19 @@ auth();
             <form  action="create.php" method="post">
                 <div class="form-group">
                     <label>Modelo</label>
-                    <input type="textfield" name="modelo" class="form-control">
+                    <input type="textfield" name="modelo" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label>Marca</label>
-                    <input type="textfield" name="marca" class="form-control">
+                    <input type="textfield" name="marca" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label>Data de Aquisição</label>
-                    <input type="date" name="dataaq" class="form-control">
+                    <input type="date" name="dataaq" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label>Última Manutenção</label>
-                    <input type="date" name="datamanutencao" class="form-control">
+                    <input type="date" name="datamanutencao" class="form-control" required>
                 </div>
 
                 <button type="submit" name="submit" class="btn btn-primary" style="display:inline-block;">Enviar</button>

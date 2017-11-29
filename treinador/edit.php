@@ -36,35 +36,35 @@ auth();
                 <input type="hidden" name="id" value="<?php echo $row['$id'];?>">
                 <div class="form-group">
                     <label>Nome</label>
-                    <input type="textfield" name="username" class="form-control" value="<?php echo $row['nome'];?>">
+                    <input type="textfield" name="username" class="form-control" value="<?php echo $row['nome'];?>" required>
                 </div>
                 <div class="form-group">
                     <label>Sobrenome</label>
-                    <input type="textfield" name="userage" class="form-control" value="<?php echo $row['sobrenome'];?>">
+                    <input type="textfield" name="userage" class="form-control" value="<?php echo $row['sobrenome'];?>" required>
                 </div>
                 <div class="form-group">
                     <label>Idade</label>
-                    <input type="number" name="idade" class="form-control" value="<?php echo $row['idade'];?>">
+                    <input type="number" name="idade" class="form-control" value="<?php echo $row['idade'];?>" required>
                 </div>
                 <div class="form-group">
                     <label>RG</label>
-                    <input type="number" name="RG" class="form-control" value="<?php echo $row['RG'];?>">
+                    <input type="number" name="RG" class="form-control" value="<?php echo $row['RG'];?>" required>
                 </div>
                 <div class="form-group">
                     <label>CPF</label>
-                    <input type="number" name="CPF" class="form-control" value="<?php echo $row['CPF'];?>">
+                    <input type="number" name="CPF" class="form-control" value="<?php echo $row['CPF'];?>" required>
                 </div>
                 <div class="form-group">
                     <label>Carteira de Trabalho</label>
-                    <input type="number" name="carteira" class="form-control" value="<?php echo $row['carteiraTrab'];?>">
+                    <input type="number" name="carteira" class="form-control" value="<?php echo $row['carteiraTrab'];?>" required>
                 </div>
                 <div class="form-group">
                     <label>Salário</label>
-                    <input type="number" name="salario" class="form-control" value="<?php echo $row['salario'];?>">
+                    <input type="number" name="salario" class="form-control" value="<?php echo $row['salario'];?>" required>
                 </div>
                 <div class="form-group">
                     <label>Data de Contratação</label>
-                    <input type="date" name="datacontratacao" class="form-control" value="<?php echo $row['dataContratacao'];?>">
+                    <input type="date" name="datacontratacao" class="form-control" value="<?php echo $row['dataContratacao'];?>" required>
                 </div>
 
 

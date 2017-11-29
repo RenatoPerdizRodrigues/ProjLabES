@@ -34,31 +34,31 @@ auth();
             <form  action="edit.php?id=<?php echo $_GET['id'];?>" method="post">
                 <div class="form-group">
                     <label>Nome</label>
-                    <input type="textfield" name="nome" class="form-control" value="<?php echo $row['nome'];?>">
+                    <input type="textfield" name="nome" class="form-control" value="<?php echo $row['nome'];?>" required>
                 </div>
                 <div class="form-group">
                     <label>Sobrenome</label>
-                    <input type="textfield" name="sobrenome" class="form-control" value="<?php echo $row['sobrenome'];?>">
+                    <input type="textfield" name="sobrenome" class="form-control" value="<?php echo $row['sobrenome'];?>" required>
                 </div>
                 <div class="form-group">
                     <label>Idade</label>
-                    <input type="number" name="idade" class="form-control" value="<?php echo $row['idade'];?>">
+                    <input type="number" name="idade" class="form-control" value="<?php echo $row['idade'];?>" required>
                 </div>
                 <div class="form-group">
                     <label>RG</label>
-                    <input type="number" name="RG" class="form-control" value="<?php echo $row['RG'];?>">
+                    <input type="number" name="RG" class="form-control" value="<?php echo $row['RG'];?>" required>
                 </div>
                 <div class="form-group">
                     <label>CPF</label>
-                    <input type="number" name="CPF" class="form-control" value="<?php echo $row['CPF'];?>">
+                    <input type="number" name="CPF" class="form-control" value="<?php echo $row['CPF'];?>" required>
                 </div>
                 <div class="form-group">
                     <label>Altura</label>
-                    <input type="number" name="altura" class="form-control" value="<?php echo $row['altura'];?>">
+                    <input type="number" name="altura" class="form-control" value="<?php echo $row['altura'];?>" required>
                 </div>
                 <div class="form-group">
                     <label>Peso</label>
-                    <input type="number" name="peso" class="form-control" value="<?php echo $row['peso'];?>">
+                    <input type="number" name="peso" class="form-control" value="<?php echo $row['peso'];?>" required>
                 </div>
 
                 <button type="submit" name="submit" class="btn btn-primary" style="display:inline-block;">Enviar</button>

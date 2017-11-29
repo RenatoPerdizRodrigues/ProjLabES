@@ -26,51 +26,51 @@ auth();
             <form  action="create.php" method="post">
                 <div class="form-group">
                     <label>Nome</label>
-                    <input type="textfield" name="nome" class="form-control">
+                    <input type="textfield" name="nome" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label>Sobrenome</label>
-                    <input type="textfield" name="sobrenome" class="form-control">
+                    <input type="textfield" name="sobrenome" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label>Idade</label>
-                    <input type="number" name="idade" class="form-control">
+                    <input type="number" name="idade" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label>RG</label>
-                    <input type="number" name="RG" class="form-control">
+                    <input type="number" name="RG" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label>CPF</label>
-                    <input type="number" name="CPF" class="form-control">
+                    <input type="number" name="CPF" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label>Carteira de Trabalho</label>
-                    <input type="number" name="carteira" class="form-control">
+                    <input type="number" name="carteira" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label>Salário</label>
-                    <input type="number" name="salario" class="form-control">
+                    <input type="number" name="salario" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label>Data de Contratação</label>
-                    <input type="date" name="datacontratacao" class="form-control">
+                    <input type="date" name="datacontratacao" class="form-control" required>
                 </div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="ativo" value="Ativo">
+                        <input class="form-check-input" type="radio" name="ativo" value="Ativo" required>
                         Ativo
                     </label>
                 </div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="ativo" value="Inativo">
+                        <input class="form-check-input" type="radio" name="ativo" value="Inativo" required>
                         Inativo
                     </label>
                 </div>
                 <div class="form-group">
                     <label>Senha</label>
-                    <input type="password" name="senha" class="form-control">
+                    <input type="password" name="senha" class="form-control" required>
                 </div>
                 <br>
 

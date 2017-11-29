@@ -35,11 +35,11 @@ $row = mysqli_fetch_assoc($var);
                     <input type="hidden" name="id" value="<?php echo $row['$id'];?>">
                 <div class="form-group">
                     <label>Nome</label>
-                    <input type="textfield" name="nome" value="<?php echo $row['nome'];?>" class="form-control">
+                    <input type="textfield" name="nome" value="<?php echo $row['nome'];?>" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label>Descrição</label>
-                    <input type="textfield" name="descricao" value="<?php echo $row['descricao'];?>" class="form-control">
+                    <input type="textfield" name="descricao" value="<?php echo $row['descricao'];?>" class="form-control" required>
                 </div>
 
                 <button type="submit" name="submit" class="btn btn-primary" style="display:inline-block;">Enviar</button>

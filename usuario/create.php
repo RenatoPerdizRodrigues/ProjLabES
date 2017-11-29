@@ -26,55 +26,55 @@ auth();
                 <form  action="create.php" method="post">
                     <div class="form-group">
                         <label>Nome</label>
-                        <input type="textfield" name="nome" class="form-control">
+                        <input type="textfield" name="nome" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label>Sobrenome</label>
-                        <input type="textfield" name="sobrenome" class="form-control">
+                        <input type="textfield" name="sobrenome" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label>Idade</label>
-                        <input type="number" name="idade" class="form-control">
+                        <input type="number" name="idade" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label>RG</label>
-                        <input type="number" name="RG" class="form-control">
+                        <input type="number" name="RG" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label>CPF</label>
-                        <input type="number" name="CPF" class="form-control">
+                        <input type="number" name="CPF" class="form-control" required>
                     </div>
                     <label>Sexo</label>
                     <br>
                     <div class="form-check form-check-inline">
                         <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="sexo" id="exampleRadios1" value="Masculino">
+                            <input class="form-check-input" type="radio" name="sexo" id="exampleRadios1" value="Masculino" required>
                             Masculino
                         </label>
                     </div>
                     <div class="form-check form-check-inline">
                         <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="sexo" id="exampleRadios1" value="Feminino">
+                            <input class="form-check-input" type="radio" name="sexo" id="exampleRadios1" value="Feminino" required>
                             Feminino
                         </label>
                     </div>
                     <div class="form-check form-check-inline">
                         <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="sexo" id="exampleRadios1" value="Outro">
+                            <input class="form-check-input" type="radio" name="sexo" id="exampleRadios1" value="Outro" required>
                             Outro
                         </label>
                     </div>
                     <div class="form-group">
                         <label>Altura</label>
-                        <input type="number" name="altura" class="form-control">
+                        <input type="number" name="altura" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label>Peso</label>
-                        <input type="number" name="peso" class="form-control">
+                        <input type="number" name="peso" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label>Senha</label>
-                        <input type="password" name="senha" class="form-control">
+                        <input type="password" name="senha" class="form-control" required>
                     </div>
                     <br>
 
