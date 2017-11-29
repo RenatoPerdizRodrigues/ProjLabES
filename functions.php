@@ -419,10 +419,11 @@ function deleteExercise($table, $id){
 
         //Cria a conexão e passa a query criada e armazenada, usando também a variável da nossa conexão. Armazena tudo isso em um $result para podermos ver se deu certo ou não.
 
-        $_SESSION['success'] = 'Excluiu.';
         $result = mysqli_query(connection(), $query);
         if (!$result) {
             $_SESSION['error'] = 'Não foi possível excluir.';
+        } else {
+            $_SESSION['success'] = 'Excluiu.';
         }
     }
 
@@ -711,5 +712,15 @@ function deleteRoutine($table, $id){
 
     redirectTo('rotina/index.php');
 }
+
+    function getPermission(){
+        $session = $_SESSION['usuario']['nome'];
+        $query = "SELECT permissao FROM treinador WHERE nome='$session'";
+        var_dump($query);
+        $result = mysqli_query(connection(), $query);
+        if ($result){
+            return (int)$result;
+        } else echo "Falhou";
+    }
 
 ?>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 28-Nov-2017 às 03:10
+-- Generation Time: 29-Nov-2017 às 03:06
 -- Versão do servidor: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -89,8 +89,17 @@ CREATE TABLE `treinador` (
   `carteiraTrab` varchar(5) DEFAULT NULL,
   `salario` int(11) DEFAULT NULL,
   `dataContratacao` date DEFAULT NULL,
-  `situacao` varchar(7) DEFAULT NULL
+  `situacao` varchar(7) DEFAULT NULL,
+  `permissao` int(11) DEFAULT NULL,
+  `senha` varchar(60) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `treinador`
+--
+
+INSERT INTO `treinador` (`id`, `nome`, `sobrenome`, `idade`, `RG`, `CPF`, `carteiraTrab`, `salario`, `dataContratacao`, `situacao`, `permissao`, `senha`) VALUES
+(1, 'admin', NULL, NULL, '12345', NULL, NULL, NULL, NULL, NULL, 3, '$2y$10$upn1970UnI7mw19jgueiqOyOD447ywNFWLza8/LyryqZ1Cu5PutHO');
 
 -- --------------------------------------------------------
 
@@ -107,7 +116,10 @@ CREATE TABLE `usuario` (
   `CPF` varchar(11) DEFAULT NULL,
   `sexo` varchar(9) DEFAULT NULL,
   `altura` float DEFAULT NULL,
-  `peso` double DEFAULT NULL
+  `peso` double DEFAULT NULL,
+  `permissao` int(11) DEFAULT NULL,
+  `senha` varchar(60) DEFAULT NULL,
+  `temrotina` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -159,10 +171,22 @@ ALTER TABLE `usuario`
 --
 
 --
+-- AUTO_INCREMENT for table `aparelho`
+--
+ALTER TABLE `aparelho`
+  MODIFY `aparelhoID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `exercicio`
+--
+ALTER TABLE `exercicio`
+  MODIFY `exercicioID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `treinador`
 --
 ALTER TABLE `treinador`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `usuario`

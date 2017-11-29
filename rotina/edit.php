@@ -23,12 +23,6 @@ include_once '../functions.php';
 
         <div class="card-block">
             <form>
-                <div class="form-group">
-                    <label>Usuário:</label>
-                    <input type="textfield" name="usuario" class="form-control">
-                </div>
-                <br>
-
                 <!--Ex-->
                 <label>Exercício 1</label>
                 <div class="form-group">

@@ -10,11 +10,16 @@ CREATE TABLE treinador(
 	carteiraTrab varchar(5),
 	salario int,
 	dataContratacao date,
-	situacao varchar(7)
+	situacao varchar(7),
+	permissao int(11),
+	senha varchar(60)
 );
 
+INSERT INTO treinador(nome, RG, permissao, senha)
+VALUES ('admin', '12345', 3, '$2y$10$upn1970UnI7mw19jgueiqOyOD447ywNFWLza8/LyryqZ1Cu5PutHO');
+
 CREATE TABLE exercicio(
-	exercicioID int PRIMARY KEY,
+	exercicioID int auto_increment PRIMARY KEY,
 	nome varchar(35),
 	descricao varchar(200)
 );
@@ -28,11 +33,14 @@ CREATE TABLE usuario(
 	CPF varchar(11),
 	sexo varchar(9),
 	altura float,
-	peso double
+	peso double,
+	permissao int(11),
+	senha varchar(60),
+	temrotina int
 );
 
 CREATE TABLE aparelho(
-	aparelhoID int PRIMARY KEY,
+	aparelhoID int auto_increment PRIMARY KEY,
 	marca varchar(35),
 	modelo varchar(35),
 	dataAquisicao date,
